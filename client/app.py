@@ -116,13 +116,16 @@ app.layout = html.Div([
             dash_table.DataTable(
                 id="history_table",
                 columns=[
-                    {"name": "ID", "id": "ID"},
-                    {"name": "Employee", "id": "Employee"},
-                    {"name": "Plant", "id": "Plant"},
-                    {"name": "Part No", "id": "Part No"},
-                    {"name": "Quantity", "id": "Quantity"},
-                    {"name": "Unit Price", "id": "Unit Price"},
-                    {"name": "Value", "id": "Value"}
+                    {"name":"ID","id":"ID"},
+                    {"name":"Employee","id":"Employee"},
+                    {"name":"Plant","id":"Plant"},
+                    {"name":"Part No","id":"Part No"},
+                    {"name":"Quantity","id":"Quantity"},
+                    {"name":"Unit Price","id":"Unit Price"},
+                    {"name":"Value","id":"Value"},
+                    {"name":"Status","id":"Status"},
+                    {"name":"Approved By","id":"Approved By"},
+                    {"name":"Approved At","id":"Approved At"}
                 ],
                 data=[],
                 page_size=10,
