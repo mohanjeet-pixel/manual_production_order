@@ -1,5 +1,9 @@
-from preprocess import preprocess_excel
-from db_connection import load_to_postgres
+from pathlib import Path
+
+from backend.etl.preprocess import preprocess_excel
+from backend.database.connection import load_to_postgres
+
+BASE_DIR = Path(__file__).parent.parent.parent
 
 
 def run_pipeline():
@@ -8,8 +12,8 @@ def run_pipeline():
     print("🚀 MANUAL ORDER ETL PIPELINE STARTED")
     print("=" * 50)
 
-    input_excel = "../data/Dev Part.xlsx"
-    output_csv = "output/clean_data.csv"
+    input_excel = str(BASE_DIR / "data" / "Dev Part.xlsx")
+    output_csv = str(BASE_DIR / "backend" / "output" / "clean_data.csv")
 
     csv_file = preprocess_excel(
         input_excel,

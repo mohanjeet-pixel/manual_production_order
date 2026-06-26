@@ -41,10 +41,3 @@ def load_to_postgres(csv_file, table_name):
     print(
         f"✅ Successfully loaded {len(df)} rows into '{table_name}' table"
     )
-
-
-if __name__ == "__main__":
-    load_to_postgres(
-        "output/clean_data.csv",
-        "products"
-    )

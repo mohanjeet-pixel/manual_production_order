@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 import psycopg2
 
-from backend.order_service import DB_CONFIG
+from backend.services.order_service import DB_CONFIG
 
 app = FastAPI()
 

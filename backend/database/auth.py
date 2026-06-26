@@ -1,5 +1,4 @@
 import psycopg2
-from urllib.parse import quote_plus
 
 DB_CONFIG = {
     "host": "localhost",

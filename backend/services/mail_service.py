@@ -2,7 +2,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-from backend.config import (
+from backend.core.config import (
     SMTP_SERVER,
     SMTP_PORT,
     EMAIL,

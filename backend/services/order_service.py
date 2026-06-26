@@ -1,8 +1,8 @@
 import psycopg2
 
-from backend.mail_service import send_mail
-from backend.approval_service import generate_token
-from backend.config import APP_URL
+from backend.services.mail_service import send_mail
+from backend.services.approval_service import generate_token
+from backend.core.config import APP_URL
 
 DB_CONFIG = {
     "host": "localhost",
