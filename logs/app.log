@@ -1,0 +1,1542 @@
+2026-06-27 11:14:00 | INFO     | main | Manual Production Order API started
+2026-06-27 11:14:36 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:14:39 | INFO     | main | Manual Production Order API started
+2026-06-27 11:14:41 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:14:44 | INFO     | main | Manual Production Order API started
+2026-06-27 11:17:02 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:17:05 | INFO     | main | Manual Production Order API started
+2026-06-27 11:17:17 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:17:20 | INFO     | main | Manual Production Order API started
+2026-06-27 11:17:34 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:17:37 | INFO     | main | Manual Production Order API started
+2026-06-27 11:17:41 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:17:43 | INFO     | main | Manual Production Order API started
+2026-06-27 11:26:30 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:26:33 | INFO     | main | Manual Production Order API started
+2026-06-27 11:26:33 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:26:37 | INFO     | main | Manual Production Order API started
+2026-06-27 11:26:39 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:26:42 | INFO     | main | Manual Production Order API started
+2026-06-27 11:26:42 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:26:45 | INFO     | main | Manual Production Order API started
+2026-06-27 11:26:50 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:26:53 | INFO     | main | Manual Production Order API started
+2026-06-27 11:26:58 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:27:01 | INFO     | main | Manual Production Order API started
+2026-06-27 11:27:04 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:27:07 | INFO     | main | Manual Production Order API started
+2026-06-27 11:27:14 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:27:16 | INFO     | main | Manual Production Order API started
+2026-06-27 11:28:52 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:28:55 | INFO     | main | Manual Production Order API started
+2026-06-27 11:36:38 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:36:41 | INFO     | main | Manual Production Order API started
+2026-06-27 11:36:49 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:36:52 | INFO     | main | Manual Production Order API started
+2026-06-27 11:37:16 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:37:21 | INFO     | main | Manual Production Order API started
+2026-06-27 11:37:31 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:37:37 | INFO     | main | Manual Production Order API started
+2026-06-27 11:37:40 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:37:46 | INFO     | main | Manual Production Order API started
+2026-06-27 11:37:58 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:38:04 | INFO     | main | Manual Production Order API started
+2026-06-27 11:38:45 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:38:51 | INFO     | main | Manual Production Order API started
+2026-06-27 11:38:54 | INFO     | main | Manual Production Order API stopped
+2026-06-27 11:38:59 | INFO     | main | Manual Production Order API started
+2026-06-27 11:40:24 | ERROR    | user_repository | get_user failed: relation "users" does not exist
+LINE 1: SELECT employee_id, password FROM users WHERE employee_id = ...
+                                          ^
+
+2026-06-27 11:40:24 | WARNING  | auth | Login attempt — unknown employee: EMP001
+2026-06-27 11:40:24 | ERROR    | audit | Audit log write failed | action=LOGIN_FAILURE: relation "audit_logs" does not exist
+LINE 2:                 INSERT INTO audit_logs
+                                    ^
+
+2026-06-27 11:40:39 | ERROR    | user_repository | get_user failed: relation "users" does not exist
+LINE 1: SELECT employee_id, password FROM users WHERE employee_id = ...
+                                          ^
+
+2026-06-27 11:40:39 | WARNING  | auth | Login attempt — unknown employee: EMP001
+2026-06-27 11:40:39 | ERROR    | audit | Audit log write failed | action=LOGIN_FAILURE: relation "audit_logs" does not exist
+LINE 2:                 INSERT INTO audit_logs
+                                    ^
+
+2026-06-27 11:40:45 | ERROR    | user_repository | get_user failed: relation "users" does not exist
+LINE 1: SELECT employee_id, password FROM users WHERE employee_id = ...
+                                          ^
+
+2026-06-27 11:40:45 | WARNING  | auth | Login attempt — unknown employee: EMP001
+2026-06-27 11:40:46 | ERROR    | audit | Audit log write failed | action=LOGIN_FAILURE: relation "audit_logs" does not exist
+LINE 2:                 INSERT INTO audit_logs
+                                    ^
+
+2026-06-27 12:21:23 | ERROR    | migrate_passwords | Migration failed: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+2026-06-27 12:21:40 | INFO     | main | Manual Production Order API stopped
+2026-06-27 12:21:45 | INFO     | main | Manual Production Order API started
+2026-06-27 12:21:50 | INFO     | migrate_passwords | Hashed password for employee: EMP001
+2026-06-27 12:21:50 | INFO     | migrate_passwords | Hashed password for employee: EMP002
+2026-06-27 12:21:50 | INFO     | migrate_passwords | Migration complete — migrated=2 skipped=0
+2026-06-27 12:22:00 | WARNING  | auth | Login attempt — wrong password: EMP001
+2026-06-27 12:22:35 | ERROR    | order_repository | get_orders_by_employee failed: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 12:23:13 | ERROR    | order_repository | get_orders_by_employee failed: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 12:25:10 | ERROR    | order_repository | get_orders_by_employee failed: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 12:25:23 | ERROR    | order_repository | get_orders_by_employee failed: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 12:25:25 | ERROR    | order_repository | get_orders_by_employee failed: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 12:30:48 | WARNING  | auth | Login attempt — wrong password: EMP001
+2026-06-27 12:34:19 | INFO     | order_repository | Order inserted | employee=EMP001 part=7013993 value=0.0 batch=None
+2026-06-27 12:34:19 | INFO     | order_service | Approval email queued | approver=ajaydharshan.s@bullmachine.com token=766f350b-5417-4005-b412-2bc03ec3031c value=0.0
+2026-06-27 12:34:19 | INFO     | mail_service | Sending mail | to=ajaydharshan.s@bullmachine.com subject=Manual Production Order — Approval Required
+2026-06-27 12:34:23 | INFO     | mail_service | Mail sent | to=ajaydharshan.s@bullmachine.com
+2026-06-27 12:34:36 | INFO     | order_repository | Order inserted | employee=EMP001 part=7013993 value=648862.0 batch=None
+2026-06-27 12:34:36 | INFO     | order_service | Approval email queued | approver=mohanjeet@bullmachine.com token=7c28e08f-5bcb-476f-8b84-8323cf91654b value=648862.0
+2026-06-27 12:34:36 | INFO     | mail_service | Sending mail | to=mohanjeet@bullmachine.com subject=Manual Production Order — Approval Required
+2026-06-27 12:34:40 | INFO     | mail_service | Mail sent | to=mohanjeet@bullmachine.com
+2026-06-27 12:35:01 | ERROR    | order_repository | get_orders_by_employee failed: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 12:35:01 | ERROR    | main | Unhandled exception: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 88, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\api\orders.py", line 23, in history
+    return get_orders(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\services\order_service.py", line 63, in get_orders
+    return get_orders_by_employee(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\repositories\order_repository.py", line 42, in get_orders_by_employee
+    cur.execute("""
+    ~~~~~~~~~~~^^^^
+        SELECT id, employee_id, plant, part_no, quantity, price, value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        ORDER BY id DESC
+        ^^^^^^^^^^^^^^^^
+    """, (employee_id,))
+    ^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 12:40:08 | INFO     | approval_service | Approving order | token=7c28e08f-5bcb-476f-8b84-8323cf91654b
+2026-06-27 12:40:08 | INFO     | order_repository | Order status updated | token=7c28e08f-5bcb-476f-8b84-8323cf91654b status=APPROVED
+2026-06-27 12:46:09 | INFO     | batch_repository | Batch inserted | batch_id=BMP20260627001 employee=string total=696644.0
+2026-06-27 12:46:09 | ERROR    | order_repository | insert_order failed: invalid input syntax for type integer: "BMP20260627001"
+LINE 5: ..., 2.0, 648862.0, 324431.0, 'PENDING', NULL, NULL, 'BMP202606...
+                                                             ^
+
+2026-06-27 12:46:09 | ERROR    | main | Unhandled exception: invalid input syntax for type integer: "BMP20260627001"
+LINE 5: ..., 2.0, 648862.0, 324431.0, 'PENDING', NULL, NULL, 'BMP202606...
+                                                             ^
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\api\batch_orders.py", line 18, in create_batch_order
+    batch_id = create_batch(request.employee_id, items)
+  File "D:\11326\Downloads\manual_production_order\backend\services\batch_service.py", line 37, in create_batch
+    insert_order(
+    ~~~~~~~~~~~~^
+        employee_id=employee_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        batch_id=batch_id,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\backend\repositories\order_repository.py", line 22, in insert_order
+    cur.execute("""
+    ~~~~~~~~~~~^^^^
+        INSERT INTO manual_production_orders
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    """, (employee_id, plant, part_no, quantity, value, price, status, token, approver, batch_id))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: "BMP20260627001"
+LINE 5: ..., 2.0, 648862.0, 324431.0, 'PENDING', NULL, NULL, 'BMP202606...
+                                                             ^
+
+2026-06-27 14:33:26 | INFO     | batch_repository | Batch inserted | batch_id=BMP20260627002 employee=EMP001 total=3363765.0
+2026-06-27 14:33:26 | ERROR    | order_repository | insert_order failed: invalid input syntax for type integer: "BMP20260627002"
+LINE 5: ...10.0, 3244310.0, 324431.0, 'PENDING', NULL, NULL, 'BMP202606...
+                                                             ^
+
+2026-06-27 14:33:26 | ERROR    | main | Unhandled exception: invalid input syntax for type integer: "BMP20260627002"
+LINE 5: ...10.0, 3244310.0, 324431.0, 'PENDING', NULL, NULL, 'BMP202606...
+                                                             ^
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\api\batch_orders.py", line 18, in create_batch_order
+    batch_id = create_batch(request.employee_id, items)
+  File "D:\11326\Downloads\manual_production_order\backend\services\batch_service.py", line 37, in create_batch
+    insert_order(
+    ~~~~~~~~~~~~^
+        employee_id=employee_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        batch_id=batch_id,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\backend\repositories\order_repository.py", line 22, in insert_order
+    cur.execute("""
+    ~~~~~~~~~~~^^^^
+        INSERT INTO manual_production_orders
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    """, (employee_id, plant, part_no, quantity, value, price, status, token, approver, batch_id))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: "BMP20260627002"
+LINE 5: ...10.0, 3244310.0, 324431.0, 'PENDING', NULL, NULL, 'BMP202606...
+                                                             ^
+
+2026-06-27 14:36:20 | INFO     | batch_repository | Batch inserted | batch_id=BMP20260627003 employee=EMP001 total=348322.0
+2026-06-27 14:36:21 | ERROR    | order_repository | insert_order failed: invalid input syntax for type integer: "BMP20260627003"
+LINE 5: ..., 1.0, 324431.0, 324431.0, 'PENDING', NULL, NULL, 'BMP202606...
+                                                             ^
+
+2026-06-27 14:36:21 | ERROR    | main | Unhandled exception: invalid input syntax for type integer: "BMP20260627003"
+LINE 5: ..., 1.0, 324431.0, 324431.0, 'PENDING', NULL, NULL, 'BMP202606...
+                                                             ^
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\api\batch_orders.py", line 18, in create_batch_order
+    batch_id = create_batch(request.employee_id, items)
+  File "D:\11326\Downloads\manual_production_order\backend\services\batch_service.py", line 37, in create_batch
+    insert_order(
+    ~~~~~~~~~~~~^
+        employee_id=employee_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        batch_id=batch_id,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\backend\repositories\order_repository.py", line 22, in insert_order
+    cur.execute("""
+    ~~~~~~~~~~~^^^^
+        INSERT INTO manual_production_orders
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    """, (employee_id, plant, part_no, quantity, value, price, status, token, approver, batch_id))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: "BMP20260627003"
+LINE 5: ..., 1.0, 324431.0, 324431.0, 'PENDING', NULL, NULL, 'BMP202606...
+                                                             ^
+
+2026-06-27 14:43:17 | INFO     | main | Manual Production Order API stopped
+2026-06-27 14:43:29 | INFO     | main | Manual Production Order API started
+2026-06-27 14:43:32 | INFO     | batch_repository | Batch inserted | batch_id=BMP20260627004 employee=EMP001 total=348322.0
+2026-06-27 14:43:32 | ERROR    | order_repository | insert_order failed: invalid input syntax for type integer: "BMP20260627004"
+LINE 5: ..., 1.0, 324431.0, 324431.0, 'PENDING', NULL, NULL, 'BMP202606...
+                                                             ^
+
+2026-06-27 14:43:32 | ERROR    | main | Unhandled exception: invalid input syntax for type integer: "BMP20260627004"
+LINE 5: ..., 1.0, 324431.0, 324431.0, 'PENDING', NULL, NULL, 'BMP202606...
+                                                             ^
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\api\batch_orders.py", line 18, in create_batch_order
+    batch_id = create_batch(request.employee_id, items)
+  File "D:\11326\Downloads\manual_production_order\backend\services\batch_service.py", line 37, in create_batch
+    insert_order(
+    ~~~~~~~~~~~~^
+        employee_id=employee_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        batch_id=batch_id,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\backend\repositories\order_repository.py", line 22, in insert_order
+    cur.execute("""
+    ~~~~~~~~~~~^^^^
+        INSERT INTO manual_production_orders
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    """, (employee_id, plant, part_no, quantity, value, price, status, token, approver, batch_id))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: "BMP20260627004"
+LINE 5: ..., 1.0, 324431.0, 324431.0, 'PENDING', NULL, NULL, 'BMP202606...
+                                                             ^
+
+2026-06-27 15:21:13 | INFO     | main | Manual Production Order API stopped
+2026-06-27 15:22:39 | INFO     | main | Manual Production Order API started
+2026-06-27 16:08:56 | INFO     | main | Manual Production Order API stopped
+2026-06-27 16:09:03 | INFO     | main | Manual Production Order API started
+2026-06-27 16:13:04 | INFO     | main | Manual Production Order API stopped
+2026-06-27 16:13:09 | INFO     | main | Manual Production Order API started
+2026-06-27 16:13:12 | INFO     | main | Manual Production Order API stopped
+2026-06-27 16:13:17 | INFO     | main | Manual Production Order API started
+2026-06-27 16:13:18 | INFO     | main | Manual Production Order API stopped
+2026-06-27 16:13:23 | INFO     | main | Manual Production Order API started
+2026-06-27 16:13:31 | INFO     | main | Manual Production Order API stopped
+2026-06-27 16:13:36 | INFO     | main | Manual Production Order API started
+2026-06-27 16:13:39 | INFO     | main | Manual Production Order API stopped
+2026-06-27 16:13:43 | INFO     | main | Manual Production Order API started
+2026-06-27 16:13:47 | INFO     | main | Manual Production Order API stopped
+2026-06-27 16:13:52 | INFO     | main | Manual Production Order API started
+2026-06-27 16:32:01 | ERROR    | order_repository | get_orders_by_employee failed: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:32:01 | ERROR    | main | Unhandled exception: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 88, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\api\orders.py", line 24, in my_orders
+    return get_orders(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\services\order_service.py", line 63, in get_orders
+    return get_orders_by_employee(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\repositories\order_repository.py", line 42, in get_orders_by_employee
+    cur.execute("""
+    ~~~~~~~~~~~^^^^
+        SELECT id, employee_id, plant, part_no, quantity, price, value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        ORDER BY id DESC
+        ^^^^^^^^^^^^^^^^
+    """, (employee_id,))
+    ^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:32:01 | ERROR    | order_repository | get_orders_by_employee failed: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:32:01 | ERROR    | main | Unhandled exception: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 88, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\api\orders.py", line 24, in my_orders
+    return get_orders(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\services\order_service.py", line 63, in get_orders
+    return get_orders_by_employee(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\repositories\order_repository.py", line 42, in get_orders_by_employee
+    cur.execute("""
+    ~~~~~~~~~~~^^^^
+        SELECT id, employee_id, plant, part_no, quantity, price, value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        ORDER BY id DESC
+        ^^^^^^^^^^^^^^^^
+    """, (employee_id,))
+    ^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:32:25 | ERROR    | order_repository | get_orders_by_employee failed: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:32:25 | ERROR    | main | Unhandled exception: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 88, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\api\orders.py", line 24, in my_orders
+    return get_orders(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\services\order_service.py", line 63, in get_orders
+    return get_orders_by_employee(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\repositories\order_repository.py", line 42, in get_orders_by_employee
+    cur.execute("""
+    ~~~~~~~~~~~^^^^
+        SELECT id, employee_id, plant, part_no, quantity, price, value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        ORDER BY id DESC
+        ^^^^^^^^^^^^^^^^
+    """, (employee_id,))
+    ^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:32:25 | ERROR    | order_repository | get_orders_by_employee failed: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:32:25 | ERROR    | main | Unhandled exception: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 88, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\api\orders.py", line 24, in my_orders
+    return get_orders(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\services\order_service.py", line 63, in get_orders
+    return get_orders_by_employee(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\repositories\order_repository.py", line 42, in get_orders_by_employee
+    cur.execute("""
+    ~~~~~~~~~~~^^^^
+        SELECT id, employee_id, plant, part_no, quantity, price, value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        ORDER BY id DESC
+        ^^^^^^^^^^^^^^^^
+    """, (employee_id,))
+    ^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:34:56 | INFO     | batch_repository | Batch inserted | batch_id=BMP20260627005 employee=EMP001 total=1345506.0
+2026-06-27 16:34:56 | ERROR    | order_repository | insert_order failed: invalid input syntax for type integer: "BMP20260627005"
+LINE 5: ...2', 2.0, 47782.0, 23891.0, 'PENDING', NULL, NULL, 'BMP202606...
+                                                             ^
+
+2026-06-27 16:34:56 | ERROR    | main | Unhandled exception: invalid input syntax for type integer: "BMP20260627005"
+LINE 5: ...2', 2.0, 47782.0, 23891.0, 'PENDING', NULL, NULL, 'BMP202606...
+                                                             ^
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\api\batch_orders.py", line 14, in create_batch_order
+    batch_id = create_batch(employee_id, items)
+  File "D:\11326\Downloads\manual_production_order\backend\services\batch_service.py", line 37, in create_batch
+    insert_order(
+    ~~~~~~~~~~~~^
+        employee_id=employee_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        batch_id=batch_id,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\backend\repositories\order_repository.py", line 22, in insert_order
+    cur.execute("""
+    ~~~~~~~~~~~^^^^
+        INSERT INTO manual_production_orders
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    """, (employee_id, plant, part_no, quantity, value, price, status, token, approver, batch_id))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: "BMP20260627005"
+LINE 5: ...2', 2.0, 47782.0, 23891.0, 'PENDING', NULL, NULL, 'BMP202606...
+                                                             ^
+
+2026-06-27 16:36:47 | INFO     | order_repository | Order inserted | employee=EMP001 part=7013992 value=47782.0 batch=None
+2026-06-27 16:36:48 | INFO     | order_service | Approval email queued | approver=mohanjeet@bullmachine.com token=3f10ffe3-3dce-4477-a907-b5596fc70c23 value=47782.0
+2026-06-27 16:36:48 | INFO     | mail_service | Sending mail | to=mohanjeet@bullmachine.com subject=Manual Production Order — Approval Required
+2026-06-27 16:36:59 | INFO     | mail_service | Mail sent | to=mohanjeet@bullmachine.com
+2026-06-27 16:37:02 | ERROR    | order_repository | get_orders_by_employee failed: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:37:02 | ERROR    | main | Unhandled exception: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 88, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\api\orders.py", line 24, in my_orders
+    return get_orders(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\services\order_service.py", line 63, in get_orders
+    return get_orders_by_employee(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\repositories\order_repository.py", line 42, in get_orders_by_employee
+    cur.execute("""
+    ~~~~~~~~~~~^^^^
+        SELECT id, employee_id, plant, part_no, quantity, price, value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        ORDER BY id DESC
+        ^^^^^^^^^^^^^^^^
+    """, (employee_id,))
+    ^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:37:03 | ERROR    | order_repository | get_orders_by_employee failed: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:37:03 | ERROR    | main | Unhandled exception: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 88, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\api\orders.py", line 24, in my_orders
+    return get_orders(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\services\order_service.py", line 63, in get_orders
+    return get_orders_by_employee(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\repositories\order_repository.py", line 42, in get_orders_by_employee
+    cur.execute("""
+    ~~~~~~~~~~~^^^^
+        SELECT id, employee_id, plant, part_no, quantity, price, value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        ORDER BY id DESC
+        ^^^^^^^^^^^^^^^^
+    """, (employee_id,))
+    ^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:37:24 | ERROR    | order_repository | get_orders_by_employee failed: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:37:24 | ERROR    | main | Unhandled exception: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 88, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\api\orders.py", line 24, in my_orders
+    return get_orders(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\services\order_service.py", line 63, in get_orders
+    return get_orders_by_employee(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\repositories\order_repository.py", line 42, in get_orders_by_employee
+    cur.execute("""
+    ~~~~~~~~~~~^^^^
+        SELECT id, employee_id, plant, part_no, quantity, price, value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        ORDER BY id DESC
+        ^^^^^^^^^^^^^^^^
+    """, (employee_id,))
+    ^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:37:24 | ERROR    | order_repository | get_orders_by_employee failed: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:37:24 | ERROR    | main | Unhandled exception: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 88, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\api\orders.py", line 24, in my_orders
+    return get_orders(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\services\order_service.py", line 63, in get_orders
+    return get_orders_by_employee(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\repositories\order_repository.py", line 42, in get_orders_by_employee
+    cur.execute("""
+    ~~~~~~~~~~~^^^^
+        SELECT id, employee_id, plant, part_no, quantity, price, value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        ORDER BY id DESC
+        ^^^^^^^^^^^^^^^^
+    """, (employee_id,))
+    ^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:41:20 | ERROR    | order_repository | get_orders_by_employee failed: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:41:20 | ERROR    | main | Unhandled exception: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 88, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\api\orders.py", line 24, in my_orders
+    return get_orders(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\services\order_service.py", line 63, in get_orders
+    return get_orders_by_employee(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\repositories\order_repository.py", line 42, in get_orders_by_employee
+    cur.execute("""
+    ~~~~~~~~~~~^^^^
+        SELECT id, employee_id, plant, part_no, quantity, price, value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        ORDER BY id DESC
+        ^^^^^^^^^^^^^^^^
+    """, (employee_id,))
+    ^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:41:20 | ERROR    | order_repository | get_orders_by_employee failed: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:41:20 | ERROR    | main | Unhandled exception: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 88, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 136, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 690, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 346, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\api\orders.py", line 24, in my_orders
+    return get_orders(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\services\order_service.py", line 63, in get_orders
+    return get_orders_by_employee(employee_id)
+  File "D:\11326\Downloads\manual_production_order\backend\repositories\order_repository.py", line 42, in get_orders_by_employee
+    cur.execute("""
+    ~~~~~~~~~~~^^^^
+        SELECT id, employee_id, plant, part_no, quantity, price, value,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        ORDER BY id DESC
+        ^^^^^^^^^^^^^^^^
+    """, (employee_id,))
+    ^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.InvalidTextRepresentation: invalid input syntax for type integer: ""
+LINE 4:                    COALESCE(batch_id, ''), created_at
+                                              ^
+
+2026-06-27 16:54:33 | INFO     | main | Manual Production Order API stopped
+2026-06-27 16:54:38 | INFO     | main | Manual Production Order API started
+2026-06-27 16:57:52 | INFO     | batch_repository | Batch inserted | batch_id=BMP20260627006 employee=EMP001 total=1345506.0
+2026-06-27 16:57:52 | INFO     | order_repository | Order inserted | employee=EMP001 part=7013992 value=47782.0 batch=BMP20260627006
+2026-06-27 16:57:52 | INFO     | order_repository | Order inserted | employee=EMP001 part=7013993 value=1297724.0 batch=BMP20260627006
+2026-06-27 16:57:52 | INFO     | batch_service | Batch email queued | batch=BMP20260627006 approver=mohanjeet@bullmachine.com items=2 total=1345506.0
+2026-06-27 16:57:52 | INFO     | mail_service | Sending mail | to=mohanjeet@bullmachine.com subject=Batch BMP20260627006 — Approval Required | &#x20B9;1,345,506.00
+2026-06-27 16:57:57 | INFO     | mail_service | Mail sent | to=mohanjeet@bullmachine.com
+2026-06-27 16:58:27 | INFO     | batch_service | Approving batch | token=3192689b-76cb-4151-ae12-7357b584615c
+2026-06-27 16:58:27 | INFO     | batch_repository | Batch status updated | batch_id=BMP20260627006 status=APPROVED
+2026-06-27 17:08:50 | INFO     | order_repository | Order inserted | employee=EMP001 part=7013992 value=71673.0 batch=None
+2026-06-27 17:08:51 | INFO     | order_service | Approval email queued | approver=mohanjeet@bullmachine.com token=e7a0067b-ba94-4a7b-8e95-650e5bbe9a48 value=71673.0
+2026-06-27 17:08:51 | INFO     | mail_service | Sending mail | to=mohanjeet@bullmachine.com subject=Manual Production Order — Approval Required
+2026-06-27 17:08:56 | INFO     | mail_service | Mail sent | to=mohanjeet@bullmachine.com
+2026-06-27 17:24:37 | INFO     | main | Manual Production Order API stopped
+2026-06-27 17:24:40 | INFO     | main | Manual Production Order API started
+2026-06-27 17:25:15 | INFO     | main | Manual Production Order API stopped
+2026-06-27 17:26:16 | INFO     | main | Manual Production Order API started
+2026-06-27 17:26:27 | INFO     | main | Manual Production Order API stopped
+2026-06-27 17:26:30 | INFO     | main | Manual Production Order API started
+2026-06-27 17:26:44 | INFO     | main | Manual Production Order API stopped
+2026-06-27 17:26:49 | INFO     | main | Manual Production Order API started
+2026-06-27 17:26:53 | INFO     | main | Manual Production Order API stopped
+2026-06-27 17:26:57 | INFO     | main | Manual Production Order API started
+2026-06-27 17:27:02 | INFO     | main | Manual Production Order API stopped

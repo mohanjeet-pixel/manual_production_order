@@ -1,206 +1,59 @@
-import psycopg2
-
-from backend.services.mail_service import send_mail
+from backend.repositories.product_repository import get_part_price
+from backend.repositories.approval_repository import get_approver_email
+from backend.repositories.order_repository import insert_order, get_orders_by_employee
+from backend.repositories.audit_repository import log_action
 from backend.services.approval_service import generate_token
 from backend.core.config import APP_URL
+from backend.core.logger import get_logger
+from backend.core.constants import STATUS_PENDING
+from backend.utils.exceptions import PartNotFoundError
 
-DB_CONFIG = {
-    "host": "localhost",
-    "port": "5432",
-    "database": "Manual_order",
-    "user": "postgres",
-    "password": "bull@123"
-}
+logger = get_logger("order_service")
 
 
-def get_part_price(part_no):
-
-    conn = psycopg2.connect(**DB_CONFIG)
-    cur = conn.cursor()
-
-    cur.execute("""
-        SELECT price
-        FROM products
-        WHERE part = %s
-    """, (part_no,))
-
-    row = cur.fetchone()
-
-    cur.close()
-    conn.close()
-
-    if row:
-        return float(row[0])
-
-    return None
-
-
-def get_approver_email(value):
-
-    conn = psycopg2.connect(**DB_CONFIG)
-    cur = conn.cursor()
-
-    cur.execute("""
-        SELECT approver_email
-        FROM approval_matrix
-        WHERE %s BETWEEN min_value AND max_value
-    """, (value,))
-
-    row = cur.fetchone()
-
-    cur.close()
-    conn.close()
-
-    if row:
-        return row[0]
-
-    raise Exception("No Approver Found")
-
-
-def save_order(employee_id, plant, part_no, quantity):
-
+def save_order(employee_id: str, plant: str, part_no: str, quantity: float) -> tuple[str, str, str]:
+    """Save order to DB and return (approver_email, subject, body) for background email dispatch."""
     price = get_part_price(part_no)
-
     if price is None:
-        raise Exception(f"Part No {part_no} not found.")
+        log_action("ORDER_CREATED", status="FAILURE", employee_id=employee_id,
+                   entity="ORDER", detail=f"Part not found: {part_no}")
+        raise PartNotFoundError(f"Part No '{part_no}' not found in products.")
 
-    value = float(quantity) * float(price)
-
+    value = float(quantity) * price
     approver = get_approver_email(value)
-
     token = generate_token()
 
-    status = "PENDING"
+    insert_order(employee_id, plant, part_no, quantity, value, price, STATUS_PENDING, token, approver)
 
-    conn = psycopg2.connect(**DB_CONFIG)
-    cur = conn.cursor()
-
-    cur.execute("""
-        INSERT INTO manual_production_orders
-        (
-            employee_id,
-            plant,
-            part_no,
-            quantity,
-            value,
-            price,
-            status,
-            approval_token,
-            approver_email
-        )
-        VALUES
-        (
-            %s,
-            %s,
-            %s,
-            %s,
-            %s,
-            %s,
-            %s,
-            %s,
-            %s
-        )
-    """,
-    (
-        employee_id,
-        plant,
-        part_no,
-        quantity,
-        value,
-        price,
-        status,
-        token,
-        approver
-    ))
-
-    conn.commit()
-
-    cur.close()
-    conn.close()
+    log_action("ORDER_CREATED", employee_id=employee_id, entity="ORDER",
+               entity_id=part_no, detail=f"plant={plant} qty={quantity} value={value:.2f}")
 
     approve_link = f"{APP_URL}/approve/{token}"
     reject_link = f"{APP_URL}/reject/{token}"
 
     body = f"""
-    <h2>Manual Production Order Approval</h2>
+    <h2>Manual Production Order &#x2014; Approval Required</h2>
 
     <b>Employee :</b> {employee_id}<br>
-    <b>Plant :</b> {plant}<br>
-    <b>Part :</b> {part_no}<br>
+    <b>Plant    :</b> {plant}<br>
+    <b>Part No  :</b> {part_no}<br>
     <b>Quantity :</b> {quantity}<br>
-    <b>Value :</b> ₹{value:,.2f}<br><br>
+    <b>Value    :</b> &#x20B9;{value:,.2f}<br><br>
 
-    <a href="{approve_link}">
-        <button style="background:green;color:white;padding:10px;">
-            APPROVE
-        </button>
+    <a href="{approve_link}" style="text-decoration:none;">
+        <button style="background:#2e7d32;color:white;padding:12px 24px;
+                       font-size:14px;border:none;border-radius:4px;">APPROVE</button>
     </a>
-
-    <br><br>
-
-    <a href="{reject_link}">
-        <button style="background:red;color:white;padding:10px;">
-            REJECT
-        </button>
+    &nbsp;&nbsp;
+    <a href="{reject_link}" style="text-decoration:none;">
+        <button style="background:#c62828;color:white;padding:12px 24px;
+                       font-size:14px;border:none;border-radius:4px;">REJECT</button>
     </a>
     """
 
-    print("========== EMAIL DEBUG ==========")
-    print("Approver :", approver)
-    print("Token    :", token)
-    print("Value    :", value)
-
-    send_mail(
-        approver,
-        "Manual Production Order Approval",
-        body
-    )
+    logger.info(f"Order saved | approver={approver} token={token} value={value}")
+    return approver, "Manual Production Order — Approval Required", body
 
 
-def get_orders(employee_id):
-
-    conn = psycopg2.connect(**DB_CONFIG)
-    cur = conn.cursor()
-
-    cur.execute("""
-        SELECT
-            id,
-            employee_id,
-            plant,
-            part_no,
-            quantity,
-            price,
-            value,
-            COALESCE(status,'PENDING'),
-            approved_by,
-            approved_at
-        FROM manual_production_orders
-        WHERE employee_id=%s
-        ORDER BY id DESC
-    """, (employee_id,))
-
-    rows = cur.fetchall()
-
-    cur.close()
-    conn.close()
-
-    orders = []
-
-    for r in rows:
-
-        orders.append({
-
-            "ID": r[0],
-            "Employee": r[1],
-            "Plant": r[2],
-            "Part No": r[3],
-            "Quantity": r[4],
-            "Unit Price": r[5],
-            "Value": r[6],
-            "Status": r[7],
-            "Approved By": r[8] if r[8] else "",
-            "Approved At": str(r[9]) if r[9] else ""
-
-        })
-
-    return orders
+def get_orders(employee_id: str) -> list[dict]:
+    return get_orders_by_employee(employee_id)

@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(& \"d:\\\\11326\\\\Downloads\\\\manual_production_order\\\\.venv\\\\Scripts\\\\python.exe\" -m pip install \"passlib[bcrypt]>=1.7.4\" \"python-jose[cryptography]>=3.3.0\")",
+      "PowerShell(Get-Command uv -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Command python -ErrorAction SilentlyContinue)",
+      "Read(//c/Users/11326/.claude/projects/d--11326-Downloads-manual-production-order/memory/**)",
+      "Bash(ls -la \"d:\\\\11326\\\\Downloads\\\\manual_production_order\\\\\" | head -50)",
+      "Read(//d/11326/Downloads/**)",
+      "Bash(uv run *)",
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)"
+    ]
+  }
+}

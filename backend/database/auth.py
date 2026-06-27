@@ -1,39 +1,31 @@
-import psycopg2
+from backend.repositories.user_repository import get_user
+from backend.repositories.audit_repository import log_action
+from backend.core.security import verify_password
+from backend.core.logger import get_logger
 
-DB_CONFIG = {
-    "host": "localhost",
-    "port": "5432",
-    "database": "Manual_order",
-    "user": "postgres",
-    "password": "bull@123"
-}
+logger = get_logger("auth")
 
 
-def validate_user(employee_id, password):
-    conn = None
-
+def validate_user(employee_id: str, password: str) -> bool:
     try:
-        conn = psycopg2.connect(**DB_CONFIG)
+        row = get_user(employee_id)
+        if not row:
+            logger.warning(f"Login attempt — unknown employee: {employee_id}")
+            log_action("LOGIN_FAILURE", status="FAILURE", employee_id=employee_id,
+                       entity="USER", detail="Employee not found")
+            return False
 
-        cursor = conn.cursor()
+        if not verify_password(password, row[1]):
+            logger.warning(f"Login attempt — wrong password: {employee_id}")
+            log_action("LOGIN_FAILURE", status="FAILURE", employee_id=employee_id,
+                       entity="USER", detail="Wrong password")
+            return False
 
-        query = """
-        SELECT employee_id
-        FROM users
-        WHERE employee_id = %s
-        AND password = %s
-        """
-
-        cursor.execute(query, (employee_id, password))
-
-        result = cursor.fetchone()
-
-        return result is not None
+        log_action("LOGIN_SUCCESS", employee_id=employee_id, entity="USER")
+        return True
 
     except Exception as e:
-        print("Database Error:", e)
+        logger.error(f"validate_user error: {e}")
+        log_action("LOGIN_FAILURE", status="ERROR", employee_id=employee_id,
+                   entity="USER", detail=str(e))
         return False
-
-    finally:
-        if conn:
-            conn.close()
