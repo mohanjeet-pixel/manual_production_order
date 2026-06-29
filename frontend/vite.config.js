@@ -6,13 +6,15 @@ export default defineConfig({
   server: {
     port: 3000,
     proxy: {
-      '/login':    { target: 'http://localhost:8000', changeOrigin: true },
-      '/orders':   { target: 'http://localhost:8000', changeOrigin: true },
-      '/batches':  { target: 'http://localhost:8000', changeOrigin: true },
-      '/products': { target: 'http://localhost:8000', changeOrigin: true },
-      '/approve':  { target: 'http://localhost:8000', changeOrigin: true },
-      '/reject':   { target: 'http://localhost:8000', changeOrigin: true },
-      '/health':   { target: 'http://localhost:8000', changeOrigin: true },
+      '/login':      { target: 'http://localhost:8000', changeOrigin: true },
+      '/orders':     { target: 'http://localhost:8000', changeOrigin: true },
+      '/batches':    { target: 'http://localhost:8000', changeOrigin: true },
+      '/products':   { target: 'http://localhost:8000', changeOrigin: true },
+      '/approve':    { target: 'http://localhost:8000', changeOrigin: true },
+      '/reject':     { target: 'http://localhost:8000', changeOrigin: true },
+      '/health':     { target: 'http://localhost:8000', changeOrigin: true },
+      '/admin':      { target: 'http://localhost:8000', changeOrigin: true },
+      '/management': { target: 'http://localhost:8000', changeOrigin: true },
     },
   },
 })

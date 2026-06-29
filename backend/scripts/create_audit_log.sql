@@ -1,4 +1,4 @@
--- Phase 9: Audit Log — run once against the Manual_orders database
+-- Phase 9: Audit Log — run once against the Manual_order database
 
 CREATE TABLE IF NOT EXISTS audit_logs (
     id          SERIAL          PRIMARY KEY,

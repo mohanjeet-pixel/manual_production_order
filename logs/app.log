@@ -1540,3 +1540,386 @@ LINE 4:                    COALESCE(batch_id, ''), created_at
 2026-06-27 17:26:53 | INFO     | main | Manual Production Order API stopped
 2026-06-27 17:26:57 | INFO     | main | Manual Production Order API started
 2026-06-27 17:27:02 | INFO     | main | Manual Production Order API stopped
+2026-06-27 17:27:06 | INFO     | main | Manual Production Order API started
+2026-06-27 17:50:58 | INFO     | order_repository | Order inserted | employee=EMP001 part=7013992 value=47782.0 batch=None
+2026-06-27 17:50:58 | INFO     | order_service | Order saved | approver=mohanjeet@bullmachine.com token=294ed45d-6ed5-4526-ad4a-bd09c1f6fcb7 value=47782.0
+2026-06-27 17:50:58 | INFO     | mail_service | Sending mail | to=mohanjeet@bullmachine.com subject=Manual Production Order — Approval Required
+2026-06-27 17:50:58 | ERROR    | mail_service | Unexpected mail error (gaierror): [Errno 11001] getaddrinfo failed
+2026-06-27 17:50:58 | ERROR    | main | Unhandled exception: [Errno 11001] getaddrinfo failed
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 137, in app
+    await response(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\responses.py", line 170, in __call__
+    await self.background()
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\background.py", line 36, in __call__
+    await task()
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\background.py", line 23, in __call__
+    await run_in_threadpool(self.func, *self.args, **self.kwargs)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\services\mail_service.py", line 22, in send_mail
+    server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=30)
+  File "C:\Users\11326\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\smtplib.py", line 261, in __init__
+    (code, msg) = self.connect(host, port)
+                  ~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\11326\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\smtplib.py", line 348, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\11326\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\smtplib.py", line 318, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+                                    self.source_address)
+                                    ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\11326\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\socket.py", line 850, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\11326\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-27 17:51:26 | INFO     | batch_repository | Batch inserted | batch_id=BMP20260627007 employee=EMP001 total=372213.0
+2026-06-27 17:51:26 | INFO     | order_repository | Order inserted | employee=EMP001 part=7013992 value=47782.0 batch=BMP20260627007
+2026-06-27 17:51:26 | INFO     | order_repository | Order inserted | employee=EMP001 part=7013993 value=324431.0 batch=BMP20260627007
+2026-06-27 17:51:26 | INFO     | batch_service | Batch saved | batch=BMP20260627007 approver=mohanjeet@bullmachine.com items=2 total=372213.0
+2026-06-27 17:51:26 | INFO     | mail_service | Sending mail | to=mohanjeet@bullmachine.com subject=Batch BMP20260627007 — Approval Required | &#x20B9;372,213.00
+2026-06-27 17:51:26 | ERROR    | mail_service | Unexpected mail error (gaierror): [Errno 11001] getaddrinfo failed
+2026-06-27 17:51:26 | ERROR    | main | Unhandled exception: [Errno 11001] getaddrinfo failed
+Traceback (most recent call last):
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2531, in app
+    await route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1700, in handle
+    await self.original_router.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 2586, in handle
+    await included_router._handle_selected(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1720, in _handle_selected
+    await original_route.handle(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 1239, in handle
+    await app(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 150, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\fastapi\routing.py", line 137, in app
+    await response(scope, receive, send)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\responses.py", line 170, in __call__
+    await self.background()
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\background.py", line 36, in __call__
+    await task()
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\background.py", line 23, in __call__
+    await run_in_threadpool(self.func, *self.args, **self.kwargs)
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\11326\Downloads\manual_production_order\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+  File "D:\11326\Downloads\manual_production_order\backend\services\mail_service.py", line 22, in send_mail
+    server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=30)
+  File "C:\Users\11326\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\smtplib.py", line 261, in __init__
+    (code, msg) = self.connect(host, port)
+                  ~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\11326\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\smtplib.py", line 348, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+                ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\11326\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\smtplib.py", line 318, in _get_socket
+    return socket.create_connection((host, port), timeout,
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+                                    self.source_address)
+                                    ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\11326\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\socket.py", line 850, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+               ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\11326\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\socket.py", line 987, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+2026-06-29 11:40:12 | INFO     | main | Manual Production Order API started
+2026-06-29 11:40:12 | INFO     | main | Manual Production Order API stopped
+2026-06-29 12:08:04 | INFO     | main | Manual Production Order API started
+2026-06-29 12:08:37 | ERROR    | user_repository | get_user failed: column "full_name" does not exist
+LINE 2: ...  SELECT employee_id, password_hash, role, email, full_name,...
+                                                             ^
+
+2026-06-29 12:08:37 | WARNING  | auth | Login attempt — unknown employee: EMP001
+2026-06-29 12:09:14 | ERROR    | user_repository | get_user failed: column "full_name" does not exist
+LINE 2: ...  SELECT employee_id, password_hash, role, email, full_name,...
+                                                             ^
+
+2026-06-29 12:09:14 | WARNING  | auth | Login attempt — unknown employee: mohanjeet
+2026-06-29 12:09:16 | ERROR    | user_repository | get_user failed: column "full_name" does not exist
+LINE 2: ...  SELECT employee_id, password_hash, role, email, full_name,...
+                                                             ^
+
+2026-06-29 12:09:16 | WARNING  | auth | Login attempt — unknown employee: mohanjeet
+2026-06-29 12:09:41 | ERROR    | user_repository | get_user failed: column "full_name" does not exist
+LINE 2: ...  SELECT employee_id, password_hash, role, email, full_name,...
+                                                             ^
+
+2026-06-29 12:09:41 | WARNING  | auth | Login attempt — unknown employee: EMP002
+2026-06-29 12:13:08 | ERROR    | user_repository | get_user failed: column "full_name" does not exist
+LINE 2: ...  SELECT employee_id, password_hash, role, email, full_name,...
+                                                             ^
+
+2026-06-29 12:13:08 | WARNING  | auth | Login attempt — unknown employee: mohanjeet
+2026-06-29 12:18:14 | ERROR    | user_repository | get_user failed: column "full_name" does not exist
+LINE 2: ...  SELECT employee_id, password_hash, role, email, full_name,...
+                                                             ^
+
+2026-06-29 12:18:14 | WARNING  | auth | Login attempt — unknown employee: mohanjeet
+2026-06-29 12:19:28 | ERROR    | user_repository | get_user failed: column "full_name" does not exist
+LINE 2: ...  SELECT employee_id, password_hash, role, email, full_name,...
+                                                             ^
+
+2026-06-29 12:19:28 | WARNING  | auth | Login attempt — unknown employee: mohanjeet
+2026-06-29 12:26:44 | ERROR    | user_repository | get_user failed: column "full_name" does not exist
+LINE 2: ...  SELECT employee_id, password_hash, role, email, full_name,...
+                                                             ^
+
+2026-06-29 12:26:44 | WARNING  | auth | Login attempt — unknown employee: mohanjeet
+2026-06-29 12:27:11 | ERROR    | user_repository | get_user failed: column "full_name" does not exist
+LINE 2: ...  SELECT employee_id, password_hash, role, email, full_name,...
+                                                             ^
+
+2026-06-29 12:27:11 | WARNING  | auth | Login attempt — unknown employee: mohanjeet
+2026-06-29 12:30:12 | INFO     | main | Manual Production Order API stopped
+2026-06-29 12:30:18 | INFO     | main | Manual Production Order API started
+2026-06-29 12:32:20 | ERROR    | user_repository | get_user failed: column "full_name" does not exist
+LINE 2: ...  SELECT employee_id, password_hash, role, email, full_name,...
+                                                             ^
+
+2026-06-29 12:32:20 | WARNING  | auth | Login attempt — unknown employee: mohanjeet
+2026-06-29 12:32:21 | ERROR    | user_repository | get_user failed: column "full_name" does not exist
+LINE 2: ...  SELECT employee_id, password_hash, role, email, full_name,...
+                                                             ^
+
+2026-06-29 12:32:21 | WARNING  | auth | Login attempt — unknown employee: mohanjeet
+2026-06-29 12:37:38 | INFO     | main | Manual Production Order API started
+2026-06-29 12:37:56 | ERROR    | user_repository | get_user failed: column "full_name" does not exist
+LINE 2: ...  SELECT employee_id, password_hash, role, email, full_name,...
+                                                             ^
+
+2026-06-29 12:37:56 | WARNING  | auth | Login attempt — unknown employee: EMP001
+2026-06-29 12:38:00 | ERROR    | user_repository | get_user failed: column "full_name" does not exist
+LINE 2: ...  SELECT employee_id, password_hash, role, email, full_name,...
+                                                             ^
+
+2026-06-29 12:38:00 | WARNING  | auth | Login attempt — unknown employee: EMP001
+2026-06-29 12:38:36 | ERROR    | user_repository | get_user failed: column "full_name" does not exist
+LINE 2: ...  SELECT employee_id, password_hash, role, email, full_name,...
+                                                             ^
+
+2026-06-29 12:38:36 | WARNING  | auth | Login attempt — unknown employee: mohanjeet
+2026-06-29 12:42:32 | INFO     | main | Manual Production Order API stopped
+2026-06-29 12:42:38 | INFO     | main | Manual Production Order API started
+2026-06-29 12:42:46 | INFO     | main | Manual Production Order API started
+2026-06-29 12:42:46 | INFO     | main | Manual Production Order API stopped
+2026-06-29 12:45:16 | INFO     | main | Manual Production Order API started
+2026-06-29 12:45:19 | WARNING  | auth | Login attempt — wrong password: LGNTST01
+2026-06-29 12:45:19 | WARNING  | auth | Login attempt — wrong password: LGNTST01
+2026-06-29 12:45:19 | WARNING  | auth | Login attempt — wrong password: LGNTST01
+2026-06-29 12:45:19 | WARNING  | auth | Login attempt — wrong password: LGNTST01
+2026-06-29 12:45:20 | WARNING  | auth | Login attempt — wrong password: LGNTST01
+2026-06-29 12:45:20 | WARNING  | auth | Login attempt — unknown employee: NOBODY999
+2026-06-29 12:45:20 | WARNING  | auth | Login attempt — unknown employee: NOBODY999
+2026-06-29 12:45:20 | WARNING  | auth | Login attempt — unknown employee: NOBODY999
+2026-06-29 12:45:20 | WARNING  | auth | Login attempt — unknown employee: NOBODY999
+2026-06-29 12:45:20 | WARNING  | auth | Login attempt — deactivated account: LGNTST01
+2026-06-29 12:45:20 | WARNING  | auth | Login attempt — unknown employee: lgntst01
+2026-06-29 12:45:20 | WARNING  | auth | Login attempt — unknown employee: Lgntst01
+2026-06-29 12:45:20 | WARNING  | auth | Login attempt — unknown employee: NOBODY
+2026-06-29 12:45:20 | WARNING  | auth | Login attempt — unknown employee: NOBODY
+2026-06-29 12:45:20 | WARNING  | auth | Login attempt — unknown employee: NOBODY
+2026-06-29 12:45:20 | WARNING  | auth | Login attempt — unknown employee: NOBODY
+2026-06-29 12:45:20 | INFO     | main | Manual Production Order API stopped
+2026-06-29 12:57:14 | INFO     | main | Manual Production Order API stopped
+2026-06-29 12:57:20 | INFO     | main | Manual Production Order API started
+2026-06-29 12:57:24 | INFO     | main | Manual Production Order API stopped
+2026-06-29 12:57:29 | INFO     | main | Manual Production Order API started
+2026-06-29 12:57:33 | INFO     | main | Manual Production Order API stopped
+2026-06-29 12:57:44 | INFO     | main | Manual Production Order API started
+2026-06-29 13:11:49 | INFO     | admin_repository | Products replaced | inserted=26215
+2026-06-29 13:19:20 | INFO     | order_repository | Order inserted | employee=EMP004 part=2000044 value=1182.2 batch=None
+2026-06-29 13:19:20 | INFO     | order_service | Order saved | approver=ajaydharshan.s@bullmachine.com token=ba9544ec-a902-4ddd-bc0d-dc70dbcb31f6 value=1182.2
+2026-06-29 13:19:20 | INFO     | mail_service | Sending mail | to=ajaydharshan.s@bullmachine.com subject=Manual Production Order — Approval Required
+2026-06-29 13:19:26 | INFO     | mail_service | Mail sent | to=ajaydharshan.s@bullmachine.com
+2026-06-29 13:21:02 | INFO     | order_repository | Order inserted | employee=EMP004 part=2000044 value=47288.0 batch=None
+2026-06-29 13:21:02 | INFO     | order_service | Order saved | approver=mohanjeet@bullmachine.com token=b2378eb9-6c65-4172-8690-b8a25c3e7bb4 value=47288.0
+2026-06-29 13:21:02 | INFO     | mail_service | Sending mail | to=mohanjeet@bullmachine.com subject=Manual Production Order — Approval Required
+2026-06-29 13:21:07 | INFO     | mail_service | Mail sent | to=mohanjeet@bullmachine.com
+2026-06-29 13:21:18 | INFO     | approval_service | Approving order | token=b2378eb9-6c65-4172-8690-b8a25c3e7bb4
+2026-06-29 13:21:18 | INFO     | order_repository | Order status updated | token=b2378eb9-6c65-4172-8690-b8a25c3e7bb4 status=APPROVED
+2026-06-29 13:21:18 | INFO     | sap_service | SAP API call | material=2000044 plant=1500 qty=200.0
+2026-06-29 13:21:33 | ERROR    | approval_service | SAP submission failed after approval | token=b2378eb9-6c65-4172-8690-b8a25c3e7bb4: HTTPConnectionPool(host='172.16.1.68', port=8000): Max retries exceeded with url: /sap/bc/zorderapi?sap-client=900%20 (Caused by ConnectTimeoutError(<HTTPConnection(host='172.16.1.68', port=8000) at 0x1abd0057380>, 'Connection to 172.16.1.68 timed out. (connect timeout=15)'))
+2026-06-29 13:21:33 | INFO     | sap_repository | SAP result stored | token=b2378eb9-6c65-4172-8690-b8a25c3e7bb4 order=29 batch=None
+2026-06-29 13:24:32 | INFO     | main | Manual Production Order API stopped
+2026-06-29 13:24:43 | INFO     | main | Manual Production Order API started
+2026-06-29 13:24:59 | INFO     | main | Manual Production Order API stopped
+2026-06-29 13:25:20 | INFO     | main | Manual Production Order API started
+2026-06-29 13:25:28 | INFO     | main | Manual Production Order API stopped
+2026-06-29 13:25:44 | INFO     | main | Manual Production Order API started
+2026-06-29 13:28:15 | INFO     | main | Manual Production Order API stopped
+2026-06-29 13:28:20 | INFO     | main | Manual Production Order API started
+2026-06-29 13:30:20 | INFO     | order_repository | Order inserted | employee=EMP004 part=2000044 value=472880.0 batch=None
+2026-06-29 13:30:20 | INFO     | order_service | Order saved | approver=mohanjeet@bullmachine.com token=a1b8d9ed-c163-4649-9595-1b2906fede33 value=472880.0
+2026-06-29 13:30:20 | INFO     | mail_service | Sending mail | to=mohanjeet@bullmachine.com subject=Manual Production Order — Approval Required
+2026-06-29 13:30:24 | INFO     | mail_service | Mail sent | to=mohanjeet@bullmachine.com
+2026-06-29 13:30:37 | INFO     | approval_service | Approving order | token=a1b8d9ed-c163-4649-9595-1b2906fede33
+2026-06-29 13:30:37 | INFO     | order_repository | Order status updated | token=a1b8d9ed-c163-4649-9595-1b2906fede33 status=APPROVED
+2026-06-29 13:30:37 | INFO     | sap_service | SAP API call | material=2000044 plant=1500 qty=2000.0
+2026-06-29 13:31:00 | INFO     | sap_repository | SAP result stored | token=a1b8d9ed-c163-4649-9595-1b2906fede33 order=30 batch=None
+2026-06-29 13:31:00 | INFO     | approval_service | SAP submission complete | token=a1b8d9ed-c163-4649-9595-1b2906fede33
+2026-06-29 14:35:20 | INFO     | main | Manual Production Order API stopped
+2026-06-29 14:35:26 | INFO     | main | Manual Production Order API started
+2026-06-29 14:39:54 | INFO     | batch_repository | Batch inserted | batch_id=BMP20260629001 employee=EMP004 total=4738.9
+2026-06-29 14:39:54 | INFO     | order_repository | Order inserted | employee=EMP004 part=2000044 value=2364.4 batch=BMP20260629001
+2026-06-29 14:39:54 | INFO     | order_repository | Order inserted | employee=EMP004 part=2000081 value=1513.5 batch=BMP20260629001
+2026-06-29 14:39:54 | INFO     | order_repository | Order inserted | employee=EMP004 part=2000130 value=861.0 batch=BMP20260629001
+2026-06-29 14:39:54 | INFO     | batch_service | Batch saved | batch=BMP20260629001 approver=ajaydharshan.s@bullmachine.com items=3 total=4738.9
+2026-06-29 14:39:54 | INFO     | mail_service | Sending mail | to=ajaydharshan.s@bullmachine.com subject=Batch BMP20260629001 — Approval Required | &#x20B9;4,738.90
+2026-06-29 14:40:02 | INFO     | mail_service | Mail sent | to=ajaydharshan.s@bullmachine.com
+2026-06-29 14:42:43 | INFO     | batch_repository | Batch inserted | batch_id=BMP20260629002 employee=EMP004 total=48916.3
+2026-06-29 14:42:43 | INFO     | order_repository | Order inserted | employee=EMP004 part=2000044 value=47288.0 batch=BMP20260629002
+2026-06-29 14:42:43 | INFO     | order_repository | Order inserted | employee=EMP004 part=2000081 value=1513.5 batch=BMP20260629002
+2026-06-29 14:42:43 | INFO     | order_repository | Order inserted | employee=EMP004 part=2000130 value=114.80000000000001 batch=BMP20260629002
+2026-06-29 14:42:43 | INFO     | batch_service | Batch saved | batch=BMP20260629002 approver=mohanjeet@bullmachine.com items=3 total=48916.3
+2026-06-29 14:42:43 | INFO     | mail_service | Sending mail | to=mohanjeet@bullmachine.com subject=Batch BMP20260629002 — Approval Required | &#x20B9;48,916.30
+2026-06-29 14:42:48 | INFO     | mail_service | Mail sent | to=mohanjeet@bullmachine.com
+2026-06-29 14:43:14 | INFO     | batch_service | Approving batch | token=2f7d6b27-a8a8-44bc-81fb-5c97a82d95c5
+2026-06-29 14:43:14 | INFO     | batch_repository | Batch status updated | batch_id=BMP20260629002 status=APPROVED
+2026-06-29 14:43:14 | INFO     | sap_service | SAP API call | material=2000044 plant=1500 qty=200.0
+2026-06-29 14:43:35 | ERROR    | batch_service | SAP submission failed | order=34: HTTPConnectionPool(host='172.16.1.68', port=8000): Max retries exceeded with url: /sap/bc/zorderapi?sap-client=900%20 (Caused by ConnectTimeoutError(<HTTPConnection(host='172.16.1.68', port=8000) at 0x1a9611a52b0>, 'Connection to 172.16.1.68 timed out. (connect timeout=300)'))
+2026-06-29 14:43:35 | INFO     | sap_repository | SAP result stored | token=2f7d6b27-a8a8-44bc-81fb-5c97a82d95c5 order=34 batch=BMP20260629002
+2026-06-29 14:43:35 | INFO     | sap_service | SAP API call | material=2000081 plant=1500 qty=30.0
+2026-06-29 14:43:57 | ERROR    | batch_service | SAP submission failed | order=35: HTTPConnectionPool(host='172.16.1.68', port=8000): Max retries exceeded with url: /sap/bc/zorderapi?sap-client=900%20 (Caused by ConnectTimeoutError(<HTTPConnection(host='172.16.1.68', port=8000) at 0x1a9615c4f50>, 'Connection to 172.16.1.68 timed out. (connect timeout=300)'))
+2026-06-29 14:43:57 | INFO     | sap_repository | SAP result stored | token=2f7d6b27-a8a8-44bc-81fb-5c97a82d95c5 order=35 batch=BMP20260629002
+2026-06-29 14:43:57 | INFO     | sap_service | SAP API call | material=2000130 plant=1500 qty=20.0
+2026-06-29 14:44:18 | ERROR    | batch_service | SAP submission failed | order=36: HTTPConnectionPool(host='172.16.1.68', port=8000): Max retries exceeded with url: /sap/bc/zorderapi?sap-client=900%20 (Caused by ConnectTimeoutError(<HTTPConnection(host='172.16.1.68', port=8000) at 0x1a9615c5a90>, 'Connection to 172.16.1.68 timed out. (connect timeout=300)'))
+2026-06-29 14:44:18 | INFO     | sap_repository | SAP result stored | token=2f7d6b27-a8a8-44bc-81fb-5c97a82d95c5 order=36 batch=BMP20260629002
+2026-06-29 14:44:52 | INFO     | order_repository | Order inserted | employee=EMP004 part=2000044 value=47288.0 batch=None
+2026-06-29 14:44:52 | INFO     | order_service | Order saved | approver=mohanjeet@bullmachine.com token=5b491dd3-d497-405f-816a-e04f6ce664a5 value=47288.0
+2026-06-29 14:44:52 | INFO     | mail_service | Sending mail | to=mohanjeet@bullmachine.com subject=Manual Production Order — Approval Required
+2026-06-29 14:44:58 | INFO     | mail_service | Mail sent | to=mohanjeet@bullmachine.com
+2026-06-29 14:45:09 | INFO     | approval_service | Approving order | token=5b491dd3-d497-405f-816a-e04f6ce664a5
+2026-06-29 14:45:09 | INFO     | order_repository | Order status updated | token=5b491dd3-d497-405f-816a-e04f6ce664a5 status=APPROVED
+2026-06-29 14:45:09 | INFO     | sap_service | SAP API call | material=2000044 plant=1500 qty=200.0
+2026-06-29 14:45:30 | ERROR    | approval_service | SAP submission failed | token=5b491dd3-d497-405f-816a-e04f6ce664a5: HTTPConnectionPool(host='172.16.1.68', port=8000): Max retries exceeded with url: /sap/bc/zorderapi?sap-client=900%20 (Caused by ConnectTimeoutError(<HTTPConnection(host='172.16.1.68', port=8000) at 0x1a9611bd810>, 'Connection to 172.16.1.68 timed out. (connect timeout=300)'))
+2026-06-29 14:45:30 | INFO     | sap_repository | SAP result stored | token=5b491dd3-d497-405f-816a-e04f6ce664a5 order=37 batch=None
+2026-06-29 14:51:15 | INFO     | main | Manual Production Order API stopped
+2026-06-29 14:51:33 | INFO     | main | Manual Production Order API started
+2026-06-29 14:51:53 | INFO     | main | Manual Production Order API stopped
+2026-06-29 14:51:58 | INFO     | main | Manual Production Order API started
+2026-06-29 14:52:12 | INFO     | main | Manual Production Order API stopped
+2026-06-29 14:52:18 | INFO     | main | Manual Production Order API started
+2026-06-29 14:52:21 | INFO     | main | Manual Production Order API stopped
+2026-06-29 14:52:26 | INFO     | main | Manual Production Order API started
+2026-06-29 14:52:30 | INFO     | main | Manual Production Order API stopped
+2026-06-29 14:52:35 | INFO     | main | Manual Production Order API started
+2026-06-29 14:52:36 | INFO     | main | Manual Production Order API stopped
+2026-06-29 14:52:42 | INFO     | main | Manual Production Order API started
+2026-06-29 14:52:48 | INFO     | main | Manual Production Order API stopped
+2026-06-29 14:52:53 | INFO     | main | Manual Production Order API started
+2026-06-29 14:59:57 | INFO     | batch_repository | Batch inserted | batch_id=BMP20260629003 employee=EMP004 total=11945.86
+2026-06-29 14:59:58 | INFO     | order_repository | Order inserted | employee=EMP004 part=2000044 value=11822.0 batch=BMP20260629003
+2026-06-29 14:59:58 | INFO     | order_repository | Order inserted | employee=EMP004 part=2000081 value=100.9 batch=BMP20260629003
+2026-06-29 14:59:58 | INFO     | order_repository | Order inserted | employee=EMP004 part=2000130 value=22.96 batch=BMP20260629003
+2026-06-29 14:59:58 | INFO     | batch_service | Batch saved | batch=BMP20260629003 approver=mohanjeet@bullmachine.com items=3 total=11945.86
+2026-06-29 14:59:58 | INFO     | mail_service | Sending mail | to=mohanjeet@bullmachine.com subject=Batch BMP20260629003 — Approval Required | ₹11,945.86
+2026-06-29 15:00:04 | INFO     | mail_service | Mail sent | to=mohanjeet@bullmachine.com
+2026-06-29 15:00:41 | INFO     | batch_service | Approving batch | token=70cc8965-0e33-45e2-b7d3-a14e5327df4d
+2026-06-29 15:00:41 | INFO     | batch_repository | Batch status updated | batch_id=BMP20260629003 status=APPROVED
+2026-06-29 15:00:41 | INFO     | sap_service | SAP API call | material=2000044 plant=1500 qty=50.0
+2026-06-29 15:01:57 | INFO     | sap_repository | SAP result stored | token=70cc8965-0e33-45e2-b7d3-a14e5327df4d order=38 batch=BMP20260629003
+2026-06-29 15:01:57 | INFO     | batch_service | SAP submitted | batch_token=70cc8965-0e33-45e2-b7d3-a14e5327df4d order=38
+2026-06-29 15:01:57 | INFO     | sap_service | SAP API call | material=2000081 plant=1500 qty=2.0
+2026-06-29 15:02:00 | INFO     | sap_repository | SAP result stored | token=70cc8965-0e33-45e2-b7d3-a14e5327df4d order=39 batch=BMP20260629003
+2026-06-29 15:02:00 | INFO     | batch_service | SAP submitted | batch_token=70cc8965-0e33-45e2-b7d3-a14e5327df4d order=39
+2026-06-29 15:02:00 | INFO     | sap_service | SAP API call | material=2000130 plant=1500 qty=4.0
+2026-06-29 15:02:06 | INFO     | sap_repository | SAP result stored | token=70cc8965-0e33-45e2-b7d3-a14e5327df4d order=40 batch=BMP20260629003
+2026-06-29 15:02:06 | INFO     | batch_service | SAP submitted | batch_token=70cc8965-0e33-45e2-b7d3-a14e5327df4d order=40
+2026-06-29 15:08:59 | INFO     | main | Manual Production Order API stopped
+2026-06-29 15:09:07 | INFO     | main | Manual Production Order API started
+2026-06-29 15:13:28 | INFO     | order_repository | Order inserted | employee=EMP004 part=2000044 value=472.88 batch=None
+2026-06-29 15:13:28 | INFO     | order_service | Order saved | approver=ajaydharshan.s@bullmachine.com token=6465fc96-c1ad-4a19-a074-f7dbb37662a2 value=472.88
+2026-06-29 15:13:28 | INFO     | mail_service | Sending mail | to=ajaydharshan.s@bullmachine.com subject=Manual Production Order — Approval Required
+2026-06-29 15:13:31 | INFO     | mail_service | Mail sent | to=ajaydharshan.s@bullmachine.com
+2026-06-29 15:14:08 | INFO     | main | Manual Production Order API stopped
+2026-06-29 15:14:15 | INFO     | main | Manual Production Order API started
+2026-06-29 15:14:23 | INFO     | order_repository | Order inserted | employee=EMP004 part=2000277LC value=303.55 batch=None
+2026-06-29 15:14:23 | INFO     | order_service | Order saved | approver=ajaydharshan.s@bullmachine.com token=d346e670-63e3-4510-a5c9-c3ba910265da value=303.55
+2026-06-29 15:14:23 | INFO     | mail_service | Sending mail | to=ajaydharshan.s@bullmachine.com subject=Manual Production Order — Approval Required
+2026-06-29 15:14:26 | INFO     | mail_service | Mail sent | to=ajaydharshan.s@bullmachine.com
+2026-06-29 15:18:35 | INFO     | batch_service | Rejecting batch | token=70cc8965-0e33-45e2-b7d3-a14e5327df4d
+2026-06-29 15:18:35 | INFO     | batch_repository | Batch status updated | batch_id=BMP20260629003 status=REJECTED
+2026-06-29 15:22:43 | INFO     | main | Manual Production Order API stopped

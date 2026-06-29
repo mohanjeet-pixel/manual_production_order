@@ -44,9 +44,11 @@ def get_batches_by_employee(employee_id: str) -> list[dict]:
                 SELECT
                     b.batch_id, b.employee_id, b.total_value, b.status,
                     b.created_at, b.approved_at,
-                    o.id, o.plant, o.part_no, o.quantity, o.price, o.value
+                    o.id, o.plant, o.part_no, o.quantity, o.price, o.value,
+                    s.api_status, s.sap_order_no
                 FROM manual_order_batches b
                 LEFT JOIN manual_production_orders o ON o.batch_id = b.batch_id
+                LEFT JOIN sap_order_results s ON s.order_id = o.id
                 WHERE b.employee_id = %s
                 ORDER BY b.created_at DESC, o.id
             """, (employee_id,))
@@ -57,26 +59,56 @@ def get_batches_by_employee(employee_id: str) -> list[dict]:
                 bid = r[0]
                 if bid not in batches:
                     batches[bid] = {
-                        "Batch ID": r[0],
-                        "Employee": r[1],
+                        "Batch ID":   r[0],
+                        "Employee":   r[1],
                         "Total Value": float(r[2]),
-                        "Status": r[3],
-                        "Created At": str(r[4]),
-                        "Approved At": str(r[5]) if r[5] else "",
+                        "Status":     r[3],
+                        "Created At": str(r[4])[:10] if r[4] else "",
+                        "Approved At": str(r[5])[:10] if r[5] else "",
                         "Orders": [],
                     }
                 if r[6] is not None:
                     batches[bid]["Orders"].append({
-                        "ID": r[6],
-                        "Plant": r[7],
-                        "Part No": r[8],
-                        "Quantity": float(r[9]),
+                        "ID":         r[6],
+                        "Plant":      r[7],
+                        "Part No":    r[8],
+                        "Quantity":   float(r[9]),
                         "Unit Price": float(r[10]),
-                        "Value": float(r[11]),
+                        "Value":      float(r[11]),
+                        "sap_status":   r[12],
+                        "sap_order_no": r[13] or "",
                     })
             return list(batches.values())
         except Exception as e:
             logger.error(f"get_batches_by_employee failed: {e}")
+            raise
+
+
+def get_orders_by_batch_token(token: str) -> list[dict]:
+    """Return all orders belonging to a batch identified by its approval token."""
+    with get_db() as conn:
+        try:
+            cur = conn.cursor()
+            cur.execute("""
+                SELECT o.id, o.employee_id, o.plant, o.part_no, o.quantity, b.batch_id
+                FROM manual_order_batches b
+                JOIN manual_production_orders o ON o.batch_id = b.batch_id
+                WHERE b.approval_token = %s
+            """, (token,))
+            rows = cur.fetchall()
+            return [
+                {
+                    "id":          r[0],
+                    "employee_id": r[1],
+                    "plant":       r[2],
+                    "part_no":     r[3],
+                    "quantity":    float(r[4]),
+                    "batch_id":    r[5],
+                }
+                for r in rows
+            ]
+        except Exception as e:
+            logger.error(f"get_orders_by_batch_token failed: {e}")
             raise
 
 

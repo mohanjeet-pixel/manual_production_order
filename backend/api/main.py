@@ -9,6 +9,8 @@ from backend.api.orders import router as orders_router
 from backend.api.approval import router as approval_router
 from backend.api.products import router as products_router
 from backend.api.batch_orders import router as batch_router
+from backend.api.management import router as management_router
+from backend.api.admin import router as admin_router
 from backend.core.logger import get_logger
 from backend.schemas.response import StandardResponse
 from backend.utils.exceptions import AppError
@@ -28,7 +30,7 @@ async def lifespan(_: FastAPI):
 
 app = FastAPI(
     title="Manual Production Order API",
-    version="2.0.0",
+    version="3.0.0",
     description="Bull Machines — Manual Production Order Management System",
     lifespan=lifespan,
 )
@@ -46,6 +48,8 @@ app.include_router(orders_router)
 app.include_router(approval_router)
 app.include_router(products_router)
 app.include_router(batch_router)
+app.include_router(management_router)
+app.include_router(admin_router)
 
 
 @app.exception_handler(AppError)
@@ -67,4 +71,4 @@ async def unhandled_error_handler(_: Request, exc: Exception):
 
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    return {"status": "ok", "version": "3.0.0"}

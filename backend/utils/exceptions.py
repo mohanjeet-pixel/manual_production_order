@@ -32,3 +32,15 @@ class BatchNotFoundError(AppError):
 
 class OrderNotFoundError(AppError):
     status_code = 404
+
+
+class PlantPartNotFoundError(AppError):
+    status_code = 422
+
+
+class ReApprovalLimitError(AppError):
+    status_code = 409
+
+
+class PlantNotFoundError(AppError):
+    status_code = 404

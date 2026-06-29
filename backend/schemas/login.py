@@ -9,5 +9,6 @@ class LoginRequest(BaseModel):
 class LoginResponse(BaseModel):
     success: bool
     employee_id: str | None = None
+    role: str | None = None
     token: str | None = None
     message: str = ""

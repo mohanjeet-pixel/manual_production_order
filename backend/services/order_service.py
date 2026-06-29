@@ -1,23 +1,29 @@
-from backend.repositories.product_repository import get_part_price
 from backend.repositories.approval_repository import get_approver_email
 from backend.repositories.order_repository import insert_order, get_orders_by_employee
 from backend.repositories.audit_repository import log_action
+from backend.repositories.plant_repository import get_price_for_part
 from backend.services.approval_service import generate_token
 from backend.core.config import APP_URL
 from backend.core.logger import get_logger
 from backend.core.constants import STATUS_PENDING
-from backend.utils.exceptions import PartNotFoundError
+from backend.utils.exceptions import AppError
 
 logger = get_logger("order_service")
 
 
+class PlantPartError(AppError):
+    status_code = 422
+
+
 def save_order(employee_id: str, plant: str, part_no: str, quantity: float) -> tuple[str, str, str]:
-    """Save order to DB and return (approver_email, subject, body) for background email dispatch."""
-    price = get_part_price(part_no)
+    """Validate plant+part, save order, return (approver_email, subject, body) for background email."""
+    price = get_price_for_part(part_no, plant)
     if price is None:
         log_action("ORDER_CREATED", status="FAILURE", employee_id=employee_id,
-                   entity="ORDER", detail=f"Part not found: {part_no}")
-        raise PartNotFoundError(f"Part No '{part_no}' not found in products.")
+                   entity="ORDER", detail=f"Part {part_no} not available in plant {plant}")
+        raise PlantPartError(
+            f"Part '{part_no}' not found for plant '{plant}'."
+        )
 
     value = float(quantity) * price
     approver = get_approver_email(value)
@@ -29,7 +35,7 @@ def save_order(employee_id: str, plant: str, part_no: str, quantity: float) -> t
                entity_id=part_no, detail=f"plant={plant} qty={quantity} value={value:.2f}")
 
     approve_link = f"{APP_URL}/approve/{token}"
-    reject_link = f"{APP_URL}/reject/{token}"
+    reject_link  = f"{APP_URL}/reject/{token}"
 
     body = f"""
     <h2>Manual Production Order &#x2014; Approval Required</h2>

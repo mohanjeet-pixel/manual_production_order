@@ -1,15 +1,17 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 
-from backend.repositories.product_repository import get_part_price
-from backend.utils.exceptions import PartNotFoundError
-from backend.dependencies.auth import get_current_user
+from backend.repositories.plant_repository import get_parts_for_plant
+from backend.schemas.response import StandardResponse
+from backend.dependencies.auth import get_current_user, CurrentUser
 
 router = APIRouter(prefix="/products", tags=["Products"])
 
 
-@router.get("/price/{part_no}")
-def get_price(part_no: str, _: str = Depends(get_current_user)):
-    price = get_part_price(part_no)
-    if price is None:
-        raise PartNotFoundError(f"Part '{part_no}' not found")
-    return {"part_no": part_no, "price": price}
+@router.get("/parts", response_model=StandardResponse)
+def list_parts(
+    plant: str = Query(..., description="Plant code — 1000 or 1500"),
+    _: CurrentUser = Depends(get_current_user),
+):
+    """List all parts available for a given plant code."""
+    parts = get_parts_for_plant(plant)
+    return StandardResponse(success=True, message=f"{len(parts)} parts", data=parts)

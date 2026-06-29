@@ -1,41 +1,61 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { api } from '../api.js'
 import { fmtINR } from '../utils.js'
 
 export default function NewOrder() {
-  const [plant, setPlant]       = useState('')
-  const [partNo, setPartNo]     = useState('')
-  const [price, setPrice]       = useState(null)
-  const [priceErr, setPriceErr] = useState(false)
-  const [quantity, setQuantity] = useState('')
-  const [msg, setMsg]           = useState(null)
-  const [loading, setLoading]   = useState(false)
+  const [plant, setPlant]         = useState('')
+  const [parts, setParts]         = useState([])
+  const [partsMap, setPartsMap]   = useState({})
+  const [partsLoading, setPartsLoading] = useState(false)
+  const [partNo, setPartNo]       = useState('')
+  const [price, setPrice]         = useState(null)
+  const [quantity, setQuantity]   = useState('')
+  const [msg, setMsg]             = useState(null)
+  const [loading, setLoading]     = useState(false)
+  const plantTimer                = useRef(null)
 
   useEffect(() => {
-    if (!partNo.trim()) { setPrice(null); setPriceErr(false); return }
-    const timer = setTimeout(() => {
-      api.getPartPrice(partNo.trim())
-        .then(data => { setPrice(data.price); setPriceErr(false) })
-        .catch(() => { setPrice(null); setPriceErr(true) })
-    }, 500)
-    return () => clearTimeout(timer)
-  }, [partNo])
+    setPartNo(''); setPrice(null); setParts([]); setPartsMap({})
+    if (!plant.trim()) return
+    clearTimeout(plantTimer.current)
+    plantTimer.current = setTimeout(() => {
+      setPartsLoading(true)
+      api.getPartsForPlant(plant.trim())
+        .then(res => {
+          const list = res.data || []
+          setParts(list)
+          const map = {}
+          list.forEach(p => { map[p.part_no] = p.price })
+          setPartsMap(map)
+        })
+        .catch(() => { setParts([]); setPartsMap({}) })
+        .finally(() => setPartsLoading(false))
+    }, 600)
+    return () => clearTimeout(plantTimer.current)
+  }, [plant])
 
-  const value = price && quantity ? parseFloat(quantity) * price : null
+  useEffect(() => {
+    const p = partsMap[partNo.trim()]
+    setPrice(p !== undefined ? p : null)
+  }, [partNo, partsMap])
+
+  const value = price !== null && quantity ? parseFloat(quantity) * price : null
+  const partDescription = parts.find(p => p.part_no === partNo.trim())?.description
 
   async function handleSubmit(e) {
     e.preventDefault()
     if (!plant.trim() || !partNo.trim() || !quantity) {
       setMsg({ type: 'error', text: 'Please fill all fields.' }); return
     }
-    if (!price) {
-      setMsg({ type: 'error', text: 'Part number not found or price unavailable.' }); return
+    if (price === null) {
+      setMsg({ type: 'error', text: 'Select a valid part number from the list.' }); return
     }
     setLoading(true); setMsg(null)
     try {
       const res = await api.createOrder(plant.trim(), partNo.trim(), parseFloat(quantity))
       setMsg({ type: 'success', text: res.message })
-      setPlant(''); setPartNo(''); setQuantity(''); setPrice(null); setPriceErr(false)
+      setPlant(''); setPartNo(''); setQuantity(''); setPrice(null)
+      setParts([]); setPartsMap({})
     } catch (err) {
       setMsg({ type: 'error', text: err.message })
     } finally {
@@ -44,7 +64,8 @@ export default function NewOrder() {
   }
 
   function handleClear() {
-    setPlant(''); setPartNo(''); setQuantity(''); setPrice(null); setPriceErr(false); setMsg(null)
+    setPlant(''); setPartNo(''); setQuantity(''); setPrice(null); setMsg(null)
+    setParts([]); setPartsMap({})
   }
 
   return (
@@ -58,15 +79,42 @@ export default function NewOrder() {
 
               <div className="form-field">
                 <label className="field-label">Plant</label>
-                <input className="field-input" placeholder="e.g. P01" value={plant}
-                  onChange={e => setPlant(e.target.value)} />
+                <input
+                  className="field-input"
+                  placeholder="e.g. 1500"
+                  value={plant}
+                  onChange={e => { setPlant(e.target.value) }}
+                />
+                {partsLoading && (
+                  <span className="field-hint">Loading parts…</span>
+                )}
+                {!partsLoading && plant.trim() && parts.length > 0 && (
+                  <span className="field-hint">{parts.length} parts available</span>
+                )}
+                {!partsLoading && plant.trim() && parts.length === 0 && (
+                  <span className="field-hint-error">No parts found for this plant</span>
+                )}
               </div>
 
               <div className="form-field">
                 <label className="field-label">Part Number</label>
-                <input className="field-input" placeholder="e.g. BM-1234" value={partNo}
-                  onChange={e => setPartNo(e.target.value)} />
-                {priceErr && <span className="field-hint-error">Part not found</span>}
+                <input
+                  className="field-input"
+                  list="parts-list"
+                  placeholder={parts.length ? 'Type to search part…' : 'Enter plant first'}
+                  value={partNo}
+                  onChange={e => setPartNo(e.target.value)}
+                  disabled={parts.length === 0}
+                  autoComplete="off"
+                />
+                <datalist id="parts-list">
+                  {parts.map(p => (
+                    <option key={p.part_no} value={p.part_no}>{p.description}</option>
+                  ))}
+                </datalist>
+                {partDescription && (
+                  <span className="field-hint">{partDescription}</span>
+                )}
               </div>
 
               <div className="form-field">
@@ -78,8 +126,14 @@ export default function NewOrder() {
 
               <div className="form-field">
                 <label className="field-label">Quantity</label>
-                <input className="field-input" type="number" min="1" placeholder="0"
-                  value={quantity} onChange={e => setQuantity(e.target.value)} />
+                <input
+                  className="field-input"
+                  type="number"
+                  min="1"
+                  placeholder="0"
+                  value={quantity}
+                  onChange={e => setQuantity(e.target.value)}
+                />
               </div>
 
               <div className="form-field form-field-full">
@@ -94,8 +148,12 @@ export default function NewOrder() {
             {msg && <div className={`msg-${msg.type}`}>{msg.text}</div>}
 
             <div className="form-actions">
-              <button type="submit" className="btn-submit" disabled={loading}>
-                {loading ? 'Submitting...' : 'Submit Order →'}
+              <button
+                type="submit"
+                className="btn-submit"
+                disabled={loading || price === null || !quantity}
+              >
+                {loading ? 'Submitting…' : 'Submit Order →'}
               </button>
               <button type="button" className="btn-clear" onClick={handleClear}>Clear</button>
             </div>

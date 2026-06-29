@@ -4,7 +4,7 @@ from backend.schemas.order import OrderRequest
 from backend.schemas.response import StandardResponse
 from backend.services.order_service import save_order, get_orders
 from backend.services.mail_service import send_mail
-from backend.dependencies.auth import get_current_user
+from backend.dependencies.auth import require_operator, CurrentUser
 
 router = APIRouter(tags=["Orders"])
 
@@ -13,10 +13,10 @@ router = APIRouter(tags=["Orders"])
 def create_order(
     order: OrderRequest,
     bg: BackgroundTasks,
-    employee_id: str = Depends(get_current_user),
+    user: CurrentUser = Depends(require_operator),
 ):
     approver, subject, body = save_order(
-        employee_id=employee_id,
+        employee_id=user.employee_id,
         plant=order.plant,
         part_no=order.part_no,
         quantity=order.quantity,
@@ -26,5 +26,5 @@ def create_order(
 
 
 @router.get("/orders/me")
-def my_orders(employee_id: str = Depends(get_current_user)):
-    return get_orders(employee_id)
+def my_orders(user: CurrentUser = Depends(require_operator)):
+    return get_orders(user.employee_id)

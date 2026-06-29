@@ -52,22 +52,22 @@ CREATE INDEX IF NOT EXISTS idx_users_active     ON users (is_active);
 CREATE TABLE IF NOT EXISTS products (
     part            VARCHAR(50)     PRIMARY KEY,
     description     TEXT,
-    pro_type        VARCHAR(10),
+    pro_type        VARCHAR(20),
     price           NUMERIC(14,2)   NOT NULL CONSTRAINT chk_products_price CHECK (price > 0),
-    unit            VARCHAR(20)     NOT NULL DEFAULT 'EA',
     is_active       BOOLEAN         NOT NULL DEFAULT TRUE,
-    updated_at      TIMESTAMP       NOT NULL DEFAULT NOW()
+    updated_at      TIMESTAMP       NOT NULL DEFAULT NOW(),
+    created_at      TIMESTAMP       NOT NULL DEFAULT NOW()
 );
 
-COMMENT ON TABLE  products IS 'Parts catalog with pricing; loaded from Dev Part.xlsx via ETL pipeline';
-COMMENT ON COLUMN products.pro_type IS 'E = Engineering part, etc.';
-COMMENT ON COLUMN products.unit     IS 'EA = each, KG = kilogram, MTR = metre, SET = set, etc.';
+COMMENT ON TABLE  products IS 'Parts catalog uploaded via Excel (Material No, Description, Price, Plant)';
+COMMENT ON COLUMN products.pro_type IS 'Plant code from upload: 1000 or 1500';
 
 CREATE OR REPLACE TRIGGER trg_products_updated_at
     BEFORE UPDATE ON products
     FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
-CREATE INDEX IF NOT EXISTS idx_products_active ON products (is_active);
+CREATE INDEX IF NOT EXISTS idx_products_active     ON products (is_active);
+CREATE INDEX IF NOT EXISTS idx_products_part_plant ON products (part, pro_type);
 
 
 -- =============================================================
@@ -110,21 +110,18 @@ CREATE TABLE IF NOT EXISTS manual_order_batches (
                                     REFERENCES users(employee_id)
                                     ON DELETE RESTRICT,
     total_value     NUMERIC(16,2)   NOT NULL,
-    item_count      INTEGER         NOT NULL DEFAULT 0,
     status          VARCHAR(20)     NOT NULL DEFAULT 'PENDING'
                                     CONSTRAINT chk_batches_status
                                     CHECK (status IN ('PENDING','APPROVED','REJECTED')),
-    approval_token  UUID            UNIQUE,
+    approval_token  VARCHAR(100)    UNIQUE,
     approver_email  VARCHAR(150),
     approved_at     TIMESTAMP,
-    remarks         TEXT,
     created_at      TIMESTAMP       NOT NULL DEFAULT NOW()
 );
 
 COMMENT ON TABLE  manual_order_batches IS 'Batch header — one approval email per batch; N line items per batch';
 COMMENT ON COLUMN manual_order_batches.batch_id       IS 'Format: BMPYYYYMMDDnnn (e.g. BMP20260627001)';
-COMMENT ON COLUMN manual_order_batches.approval_token IS 'UUID embedded in approve/reject email links';
-COMMENT ON COLUMN manual_order_batches.item_count     IS 'Denormalised count of line items for fast display';
+COMMENT ON COLUMN manual_order_batches.approval_token IS 'UUID string embedded in approve/reject email links';
 
 CREATE INDEX IF NOT EXISTS idx_batches_employee  ON manual_order_batches (employee_id);
 CREATE INDEX IF NOT EXISTS idx_batches_status    ON manual_order_batches (status);
@@ -145,20 +142,21 @@ CREATE TABLE IF NOT EXISTS manual_production_orders (
                                     REFERENCES products(part)
                                     ON DELETE RESTRICT,
     quantity        NUMERIC(12,3)   NOT NULL CONSTRAINT chk_orders_qty CHECK (quantity > 0),
-    price           NUMERIC(14,2)   NOT NULL,               -- snapshot at order time
-    value           NUMERIC(16,2)   NOT NULL                -- quantity × price
-                                    GENERATED ALWAYS AS (quantity * price) STORED,
+    price           NUMERIC(14,2)   NOT NULL,
+    value           NUMERIC(16,2)   NOT NULL,
     status          VARCHAR(20)     NOT NULL DEFAULT 'PENDING'
                                     CONSTRAINT chk_orders_status
                                     CHECK (status IN ('PENDING','APPROVED','REJECTED')),
-    approval_token  UUID            UNIQUE,                 -- NULL when inside a batch
+    approval_token  VARCHAR(100)    UNIQUE,
     approver_email  VARCHAR(150),
     approved_by     VARCHAR(150),
     approved_at     TIMESTAMP,
     batch_id        VARCHAR(20)
                                     REFERENCES manual_order_batches(batch_id)
                                     ON DELETE RESTRICT,
-    remarks         TEXT,
+    re_approval_count  INTEGER      NOT NULL DEFAULT 0,
+    re_approved_at     TIMESTAMP,
+    re_approved_by     VARCHAR(150),
     created_at      TIMESTAMP       NOT NULL DEFAULT NOW()
 );
 
@@ -284,7 +282,15 @@ COMMENT ON VIEW v_dashboard_summary IS 'Per-employee order statistics for the da
 
 
 -- =============================================================
--- NOTE: Run these migration scripts separately AFTER schema:
---   backend/scripts/migrate_passwords.py   -- hash plain passwords
---   backend/scripts/create_batch_tables.sql -- if upgrading old DB
+-- SEED: ADMIN USER
+-- Default password: Bull@1234
 -- =============================================================
+INSERT INTO users (employee_id, password_hash, full_name, email, department, role)
+VALUES (
+    'mohanjeet',
+    '$2b$12$/fDUtRg7oLERcWOF2G0Yaek6agkGNN6uvoVNBK97Y7CatA2s.XhXa',
+    'Mohanjeet',
+    'mohanjeet@bullmachine.com',
+    'Admin',
+    'ADMIN'
+) ON CONFLICT (employee_id) DO NOTHING;

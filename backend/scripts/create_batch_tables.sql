@@ -1,4 +1,4 @@
--- Phase 7: Batch Orders — run once against the Manual_orders database
+-- Phase 7: Batch Orders — run once against the Manual_order database
 -- Safe to run multiple times (uses IF NOT EXISTS / IF EXISTS guards)
 
 -- 1. Create batch header table

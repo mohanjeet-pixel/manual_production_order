@@ -9,13 +9,14 @@ router = APIRouter(tags=["Auth"])
 
 @router.post("/login", response_model=LoginResponse)
 def login(data: LoginRequest):
-    success = validate_user(data.employee_id, data.password)
-    if not success:
+    result = validate_user(data.employee_id, data.password)
+    if not result:
         return LoginResponse(success=False, message="Invalid employee ID or password")
-    token = create_token(data.employee_id)
+    token = create_token(result["employee_id"], result["role"])
     return LoginResponse(
         success=True,
-        employee_id=data.employee_id,
+        employee_id=result["employee_id"],
+        role=result["role"],
         token=token,
         message="Login successful",
     )
