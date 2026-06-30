@@ -18,16 +18,16 @@ def _generate_batch_id(cur) -> str:
     return f"{prefix}{count + 1:03d}"
 
 
-def insert_batch(employee_id: str, total_value: float, token: str, approver: str) -> str:
+def insert_batch(employee_id: str, total_value: float, token: str, approver: str, remark: str | None = None) -> str:
     with get_db() as conn:
         try:
             cur = conn.cursor()
             batch_id = _generate_batch_id(cur)
             cur.execute("""
                 INSERT INTO manual_order_batches
-                    (batch_id, employee_id, total_value, status, approval_token, approver_email)
-                VALUES (%s, %s, %s, 'PENDING', %s, %s)
-            """, (batch_id, employee_id, total_value, token, approver))
+                    (batch_id, employee_id, total_value, status, approval_token, approver_email, remark)
+                VALUES (%s, %s, %s, 'PENDING', %s, %s, %s)
+            """, (batch_id, employee_id, total_value, token, approver, remark))
             conn.commit()
             logger.info(f"Batch inserted | batch_id={batch_id} employee={employee_id} total={total_value}")
             return batch_id
@@ -48,7 +48,13 @@ def get_batches_by_employee(employee_id: str) -> list[dict]:
                     s.api_status, s.sap_order_no
                 FROM manual_order_batches b
                 LEFT JOIN manual_production_orders o ON o.batch_id = b.batch_id
-                LEFT JOIN sap_order_results s ON s.order_id = o.id
+                LEFT JOIN LATERAL (
+                    SELECT api_status, sap_order_no
+                    FROM sap_order_results
+                    WHERE order_id = o.id
+                    ORDER BY id DESC
+                    LIMIT 1
+                ) s ON TRUE
                 WHERE b.employee_id = %s
                 ORDER BY b.created_at DESC, o.id
             """, (employee_id,))
@@ -81,6 +87,59 @@ def get_batches_by_employee(employee_id: str) -> list[dict]:
             return list(batches.values())
         except Exception as e:
             logger.error(f"get_batches_by_employee failed: {e}")
+            raise
+
+
+def get_batch_by_token(token: str) -> dict | None:
+    """Return batch header fields for a given approval token."""
+    with get_db() as conn:
+        try:
+            cur = conn.cursor()
+            cur.execute("""
+                SELECT batch_id, employee_id, status, total_value, approver_email, remark
+                FROM manual_order_batches
+                WHERE approval_token = %s
+            """, (token,))
+            row = cur.fetchone()
+            if not row:
+                return None
+            return {
+                "batch_id":       row[0],
+                "employee_id":    row[1],
+                "status":         row[2],
+                "total_value":    float(row[3]),
+                "approver_email": row[4],
+                "remark":         row[5] or "",
+            }
+        except Exception as e:
+            logger.error(f"get_batch_by_token failed: {e}")
+            raise
+
+
+def get_batch_items_by_token(token: str) -> list[dict]:
+    """Return all line items for a batch action page."""
+    with get_db() as conn:
+        try:
+            cur = conn.cursor()
+            cur.execute("""
+                SELECT o.plant, o.part_no, o.quantity, o.price, o.value
+                FROM manual_order_batches b
+                JOIN manual_production_orders o ON o.batch_id = b.batch_id
+                WHERE b.approval_token = %s
+                ORDER BY o.id
+            """, (token,))
+            return [
+                {
+                    "plant":    r[0],
+                    "part_no":  r[1],
+                    "quantity": float(r[2]),
+                    "price":    float(r[3]),
+                    "value":    float(r[4]),
+                }
+                for r in cur.fetchall()
+            ]
+        except Exception as e:
+            logger.error(f"get_batch_items_by_token failed: {e}")
             raise
 
 

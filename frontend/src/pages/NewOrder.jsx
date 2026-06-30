@@ -1,6 +1,8 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { api } from '../api.js'
 import { fmtINR } from '../utils.js'
+
+const PLANTS = ['1000', '1500']
 
 export default function NewOrder() {
   const [plant, setPlant]         = useState('')
@@ -10,28 +12,24 @@ export default function NewOrder() {
   const [partNo, setPartNo]       = useState('')
   const [price, setPrice]         = useState(null)
   const [quantity, setQuantity]   = useState('')
+  const [remark, setRemark]       = useState('')
   const [msg, setMsg]             = useState(null)
   const [loading, setLoading]     = useState(false)
-  const plantTimer                = useRef(null)
 
   useEffect(() => {
     setPartNo(''); setPrice(null); setParts([]); setPartsMap({})
-    if (!plant.trim()) return
-    clearTimeout(plantTimer.current)
-    plantTimer.current = setTimeout(() => {
-      setPartsLoading(true)
-      api.getPartsForPlant(plant.trim())
-        .then(res => {
-          const list = res.data || []
-          setParts(list)
-          const map = {}
-          list.forEach(p => { map[p.part_no] = p.price })
-          setPartsMap(map)
-        })
-        .catch(() => { setParts([]); setPartsMap({}) })
-        .finally(() => setPartsLoading(false))
-    }, 600)
-    return () => clearTimeout(plantTimer.current)
+    if (!plant) return
+    setPartsLoading(true)
+    api.getPartsForPlant(plant)
+      .then(res => {
+        const list = res.data || []
+        setParts(list)
+        const map = {}
+        list.forEach(p => { map[p.part_no] = p.price })
+        setPartsMap(map)
+      })
+      .catch(() => { setParts([]); setPartsMap({}) })
+      .finally(() => setPartsLoading(false))
   }, [plant])
 
   useEffect(() => {
@@ -44,7 +42,7 @@ export default function NewOrder() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    if (!plant.trim() || !partNo.trim() || !quantity) {
+    if (!plant || !partNo.trim() || !quantity) {
       setMsg({ type: 'error', text: 'Please fill all fields.' }); return
     }
     if (price === null) {
@@ -52,9 +50,9 @@ export default function NewOrder() {
     }
     setLoading(true); setMsg(null)
     try {
-      const res = await api.createOrder(plant.trim(), partNo.trim(), parseFloat(quantity))
+      const res = await api.createOrder(plant, partNo.trim(), parseFloat(quantity), remark.trim() || null)
       setMsg({ type: 'success', text: res.message })
-      setPlant(''); setPartNo(''); setQuantity(''); setPrice(null)
+      setPlant(''); setPartNo(''); setQuantity(''); setPrice(null); setRemark('')
       setParts([]); setPartsMap({})
     } catch (err) {
       setMsg({ type: 'error', text: err.message })
@@ -64,7 +62,7 @@ export default function NewOrder() {
   }
 
   function handleClear() {
-    setPlant(''); setPartNo(''); setQuantity(''); setPrice(null); setMsg(null)
+    setPlant(''); setPartNo(''); setQuantity(''); setPrice(null); setRemark(''); setMsg(null)
     setParts([]); setPartsMap({})
   }
 
@@ -79,19 +77,23 @@ export default function NewOrder() {
 
               <div className="form-field">
                 <label className="field-label">Plant</label>
-                <input
+                <select
                   className="field-input"
-                  placeholder="e.g. 1500"
                   value={plant}
-                  onChange={e => { setPlant(e.target.value) }}
-                />
+                  onChange={e => setPlant(e.target.value)}
+                >
+                  <option value="">— Select Plant —</option>
+                  {PLANTS.map(p => (
+                    <option key={p} value={p}>{p}</option>
+                  ))}
+                </select>
                 {partsLoading && (
                   <span className="field-hint">Loading parts…</span>
                 )}
-                {!partsLoading && plant.trim() && parts.length > 0 && (
+                {!partsLoading && plant && parts.length > 0 && (
                   <span className="field-hint">{parts.length} parts available</span>
                 )}
-                {!partsLoading && plant.trim() && parts.length === 0 && (
+                {!partsLoading && plant && parts.length === 0 && (
                   <span className="field-hint-error">No parts found for this plant</span>
                 )}
               </div>
@@ -101,7 +103,7 @@ export default function NewOrder() {
                 <input
                   className="field-input"
                   list="parts-list"
-                  placeholder={parts.length ? 'Type to search part…' : 'Enter plant first'}
+                  placeholder={parts.length ? 'Type to search part…' : 'Select plant first'}
                   value={partNo}
                   onChange={e => setPartNo(e.target.value)}
                   disabled={parts.length === 0}
@@ -141,6 +143,17 @@ export default function NewOrder() {
                 <div className="field-display field-display-highlight">
                   {value !== null ? fmtINR(value) : '—'}
                 </div>
+              </div>
+
+              <div className="form-field form-field-full">
+                <label className="field-label">Remark</label>
+                <input
+                  className="field-input"
+                  placeholder="Optional — reason or notes for this order"
+                  value={remark}
+                  onChange={e => setRemark(e.target.value)}
+                  maxLength={500}
+                />
               </div>
 
             </div>

@@ -14,12 +14,16 @@ def generate_token() -> str:
     return str(uuid.uuid4())
 
 
-def approve_order_db(token: str) -> dict:
-    """Update order status to APPROVED in DB and return the order. Fast — no SAP call."""
+def approve_order_db(token: str) -> dict | None:
+    """Update order status to APPROVED and return the order.
+    Returns None if the order was already processed — caller must skip SAP in that case."""
     logger.info(f"Approving order | token={token}")
     order = get_order_by_token(token)
     if not order:
         raise ValueError(f"No order found for token: {token}")
+    if order["status"] != "PENDING":
+        logger.warning(f"approve_order_db: order already {order['status']} | token={token}")
+        return None
     update_order_status(token, STATUS_APPROVED)
     log_action("ORDER_APPROVED", entity="ORDER", entity_id=token)
     return order
@@ -42,6 +46,12 @@ def submit_to_sap(token: str, order: dict) -> None:
 
 
 def reject_order(token: str) -> None:
+    order = get_order_by_token(token)
+    if not order:
+        raise ValueError(f"No order found for token: {token}")
+    if order["status"] != "PENDING":
+        logger.warning(f"reject_order: order already {order['status']} — skipping | token={token}")
+        return
     logger.info(f"Rejecting order | token={token}")
     update_order_status(token, STATUS_REJECTED)
     log_action("ORDER_REJECTED", entity="ORDER", entity_id=token)

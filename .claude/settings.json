@@ -10,7 +10,8 @@
       "Bash(uv run *)",
       "PowerShell(node --version)",
       "PowerShell(npm --version)",
-      "PowerShell($env:PGPASSWORD = \"bull@123\"; psql -h localhost -p 5432 -U postgres -d Manual_order -f \"d:\\\\11326\\\\Downloads\\\\manual_production_order\\\\backend\\\\scripts\\\\cleanup_migration.sql\")"
+      "PowerShell($env:PGPASSWORD = \"bull@123\"; psql -h localhost -p 5432 -U postgres -d Manual_order -f \"d:\\\\11326\\\\Downloads\\\\manual_production_order\\\\backend\\\\scripts\\\\cleanup_migration.sql\")",
+      "PowerShell(python -c \"import alembic; print\\(alembic.__version__\\)\" 2>&1)"
     ]
   }
 }

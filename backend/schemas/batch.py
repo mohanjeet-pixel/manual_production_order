@@ -9,3 +9,4 @@ class BatchItem(BaseModel):
 
 class BatchOrderRequest(BaseModel):
     items: list[BatchItem]
+    remark: str | None = None

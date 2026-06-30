@@ -20,7 +20,7 @@ def create_batch_order(
     user: CurrentUser = Depends(require_operator),
 ):
     items = [item.model_dump() for item in request.items]
-    batch_id, approver, subject, body = create_batch(user.employee_id, items)
+    batch_id, approver, subject, body = create_batch(user.employee_id, items, remark=request.remark)
     bg.add_task(send_mail, approver, subject, body)
     return StandardResponse(
         success=True,
@@ -38,7 +38,8 @@ def my_batches(user: CurrentUser = Depends(require_operator)):
 @router.get("/approve/batch/{token}", response_model=StandardResponse)
 def approve(token: str, background_tasks: BackgroundTasks):
     orders = approve_batch_db(token)
-    background_tasks.add_task(submit_batch_to_sap, token, orders)
+    if orders:
+        background_tasks.add_task(submit_batch_to_sap, token, orders)
     return StandardResponse(
         success=True,
         message=f"Batch approved — SAP submission running in background for {len(orders)} orders",

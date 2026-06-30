@@ -15,6 +15,7 @@ def insert_order(
     token: str | None = None,
     approver: str | None = None,
     batch_id: str | None = None,
+    remark: str | None = None,
 ):
     with get_db() as conn:
         try:
@@ -22,9 +23,9 @@ def insert_order(
             cur.execute("""
                 INSERT INTO manual_production_orders
                     (employee_id, plant, part_no, quantity, value, price,
-                     status, approval_token, approver_email, batch_id)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """, (employee_id, plant, part_no, quantity, value, price, status, token, approver, batch_id))
+                     status, approval_token, approver_email, batch_id, remark)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """, (employee_id, plant, part_no, quantity, value, price, status, token, approver, batch_id, remark))
             conn.commit()
             logger.info(f"Order inserted | employee={employee_id} part={part_no} value={value} batch={batch_id}")
         except Exception as e:
@@ -42,7 +43,13 @@ def get_orders_by_employee(employee_id: str) -> list[dict]:
                        o.batch_id, o.created_at,
                        s.api_status, s.sap_order_no, s.error_detail, s.messages
                 FROM manual_production_orders o
-                LEFT JOIN sap_order_results s ON s.order_id = o.id
+                LEFT JOIN LATERAL (
+                    SELECT api_status, sap_order_no, error_detail, messages
+                    FROM sap_order_results
+                    WHERE order_id = o.id
+                    ORDER BY id DESC
+                    LIMIT 1
+                ) s ON TRUE
                 WHERE o.employee_id = %s
                 ORDER BY o.id DESC
             """, (employee_id,))
@@ -78,7 +85,8 @@ def get_order_by_token(token: str) -> dict | None:
         try:
             cur = conn.cursor()
             cur.execute("""
-                SELECT id, employee_id, plant, part_no, quantity
+                SELECT id, employee_id, plant, part_no, quantity, status,
+                       price, value, remark
                 FROM manual_production_orders
                 WHERE approval_token = %s
             """, (token,))
@@ -91,6 +99,10 @@ def get_order_by_token(token: str) -> dict | None:
                 "plant":       row[2],
                 "part_no":     row[3],
                 "quantity":    float(row[4]),
+                "status":      row[5],
+                "price":       float(row[6]),
+                "value":       float(row[7]),
+                "remark":      row[8] or "",
             }
         except Exception as e:
             logger.error(f"get_order_by_token failed: {e}")

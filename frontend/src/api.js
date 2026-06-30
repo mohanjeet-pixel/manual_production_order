@@ -1,3 +1,9 @@
+let _onUnauthorized = null
+
+export function setUnauthorizedHandler(fn) {
+  _onUnauthorized = fn
+}
+
 function getToken() {
   return localStorage.getItem('bm_token')
 }
@@ -15,6 +21,10 @@ async function request(method, path, body = null) {
 
   const data = await res.json()
   if (!res.ok) {
+    if (res.status === 401) {
+      _onUnauthorized?.()
+      throw new Error('Your session has expired. Please log in again.')
+    }
     throw new Error(data.message || data.detail || `Request failed (${res.status})`)
   }
   return data
@@ -26,16 +36,16 @@ export const api = {
     request('POST', '/login', { employee_id, password }),
 
   // Operator — orders
-  createOrder: (plant, part_no, quantity) =>
-    request('POST', '/orders', { plant, part_no, quantity }),
+  createOrder: (plant, part_no, quantity, remark) =>
+    request('POST', '/orders', { plant, part_no, quantity, remark: remark || null }),
   getOrders: () =>
     request('GET', '/orders/me'),
   getPartsForPlant: (plant) =>
     request('GET', `/products/parts?plant=${encodeURIComponent(plant)}`),
 
   // Operator — batches
-  createBatch: (items) =>
-    request('POST', '/batches', { items }),
+  createBatch: (items, remark) =>
+    request('POST', '/batches', { items, remark: remark || null }),
   getBatches: () =>
     request('GET', '/batches/me'),
 

@@ -1,7 +1,9 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { api } from '../api.js'
 import StatusBadge from '../components/StatusBadge.jsx'
 import { fmtINR } from '../utils.js'
+
+const PLANTS = ['1000', '1500']
 
 const emptyRow = () => ({ part_no: '', quantity: '', price: null })
 
@@ -32,9 +34,9 @@ export default function BatchOrder() {
   const [partsMap, setPartsMap] = useState({})
   const [partsLoading, setPartsLoading] = useState(false)
   const [rows, setRows]         = useState([emptyRow(), emptyRow(), emptyRow()])
+  const [remark, setRemark]     = useState('')
   const [msg, setMsg]           = useState(null)
   const [submitting, setSubmitting] = useState(false)
-  const plantTimer              = useRef(null)
 
   // ── History ────────────────────────────────────────────────
   const [batches, setBatches]   = useState([])
@@ -45,22 +47,18 @@ export default function BatchOrder() {
   useEffect(() => {
     setRows(prev => prev.map(r => ({ ...r, part_no: '', price: null })))
     setParts([]); setPartsMap({})
-    if (!plant.trim()) return
-    clearTimeout(plantTimer.current)
-    plantTimer.current = setTimeout(() => {
-      setPartsLoading(true)
-      api.getPartsForPlant(plant.trim())
-        .then(res => {
-          const list = res.data || []
-          setParts(list)
-          const map = {}
-          list.forEach(p => { map[p.part_no] = p.price })
-          setPartsMap(map)
-        })
-        .catch(() => { setParts([]); setPartsMap({}) })
-        .finally(() => setPartsLoading(false))
-    }, 600)
-    return () => clearTimeout(plantTimer.current)
+    if (!plant) return
+    setPartsLoading(true)
+    api.getPartsForPlant(plant)
+      .then(res => {
+        const list = res.data || []
+        setParts(list)
+        const map = {}
+        list.forEach(p => { map[p.part_no] = p.price })
+        setPartsMap(map)
+      })
+      .catch(() => { setParts([]); setPartsMap({}) })
+      .finally(() => setPartsLoading(false))
   }, [plant])
 
   // Load history when tab switches to history
@@ -90,16 +88,16 @@ export default function BatchOrder() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    if (!plant.trim()) { setMsg({ type: 'error', text: 'Enter a plant code first.' }); return }
+    if (!plant) { setMsg({ type: 'error', text: 'Select a plant first.' }); return }
     if (!filledRows.length) { setMsg({ type: 'error', text: 'Add at least one complete row.' }); return }
     setSubmitting(true); setMsg(null)
     try {
       const items = filledRows.map(r => ({
-        plant: plant.trim(), part_no: r.part_no.trim(), quantity: parseFloat(r.quantity),
+        plant: plant, part_no: r.part_no.trim(), quantity: parseFloat(r.quantity),
       }))
-      const res = await api.createBatch(items)
+      const res = await api.createBatch(items, remark.trim() || null)
       setMsg({ type: 'success', text: res.message || 'Batch created successfully' })
-      setPlant(''); setRows([emptyRow(), emptyRow(), emptyRow()])
+      setPlant(''); setRows([emptyRow(), emptyRow(), emptyRow()]); setRemark('')
       setParts([]); setPartsMap({})
     } catch (err) {
       setMsg({ type: 'error', text: err.message })
@@ -109,7 +107,7 @@ export default function BatchOrder() {
   }
 
   function handleClear() {
-    setPlant(''); setRows([emptyRow(), emptyRow(), emptyRow()])
+    setPlant(''); setRows([emptyRow(), emptyRow(), emptyRow()]); setRemark('')
     setParts([]); setPartsMap({}); setMsg(null)
   }
 
@@ -142,12 +140,16 @@ export default function BatchOrder() {
               <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start', marginBottom: 20, flexWrap: 'wrap' }}>
                 <div style={{ flex: '0 0 220px' }}>
                   <label className="field-label">Plant (all rows)</label>
-                  <input
+                  <select
                     className="field-input"
-                    placeholder="e.g. 1500"
                     value={plant}
                     onChange={e => setPlant(e.target.value)}
-                  />
+                  >
+                    <option value="">— Select Plant —</option>
+                    {PLANTS.map(p => (
+                      <option key={p} value={p}>{p}</option>
+                    ))}
+                  </select>
                   {partsLoading && <span className="field-hint">Loading parts…</span>}
                   {!partsLoading && plant && parts.length > 0 &&
                     <span className="field-hint">{parts.length} parts available</span>}
@@ -194,7 +196,7 @@ export default function BatchOrder() {
                         <input
                           className="field-input"
                           list={`pl-${i}`}
-                          placeholder={parts.length ? 'Type to search part…' : 'Enter plant first'}
+                          placeholder={parts.length ? 'Type to search part…' : 'Select plant first'}
                           value={row.part_no}
                           onChange={e => updateRow(i, 'part_no', e.target.value)}
                           disabled={parts.length === 0}
@@ -230,6 +232,17 @@ export default function BatchOrder() {
               })}
 
               <button type="button" className="btn-add-row" onClick={addRow}>+ Add Row</button>
+
+              <div className="form-field" style={{ marginTop: 16 }}>
+                <label className="field-label">Remark</label>
+                <input
+                  className="field-input"
+                  placeholder="Optional — reason or notes for this batch"
+                  value={remark}
+                  onChange={e => setRemark(e.target.value)}
+                  maxLength={500}
+                />
+              </div>
 
               {msg && <div className={`msg-${msg.type}`} style={{ marginTop: 14 }}>{msg.text}</div>}
 

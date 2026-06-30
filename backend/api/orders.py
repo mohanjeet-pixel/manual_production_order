@@ -20,6 +20,7 @@ def create_order(
         plant=order.plant,
         part_no=order.part_no,
         quantity=order.quantity,
+        remark=order.remark,
     )
     bg.add_task(send_mail, approver, subject, body)
     return StandardResponse(success=True, message="Order saved successfully")

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { setUnauthorizedHandler } from './api.js'
 import Login from './pages/Login.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import NewOrder from './pages/NewOrder.jsx'
@@ -44,6 +45,10 @@ export default function App() {
     setUser(null)
     setPage('dashboard')
   }
+
+  useEffect(() => {
+    setUnauthorizedHandler(handleLogout)
+  }, [])
 
   if (!user) return <Login onLogin={handleLogin} />
 

@@ -116,6 +116,7 @@ CREATE TABLE IF NOT EXISTS manual_order_batches (
     approval_token  VARCHAR(100)    UNIQUE,
     approver_email  VARCHAR(150),
     approved_at     TIMESTAMP,
+    remark          TEXT,
     created_at      TIMESTAMP       NOT NULL DEFAULT NOW()
 );
 
@@ -157,6 +158,7 @@ CREATE TABLE IF NOT EXISTS manual_production_orders (
     re_approval_count  INTEGER      NOT NULL DEFAULT 0,
     re_approved_at     TIMESTAMP,
     re_approved_by     VARCHAR(150),
+    remark          TEXT,
     created_at      TIMESTAMP       NOT NULL DEFAULT NOW()
 );
 
@@ -175,7 +177,40 @@ CREATE INDEX IF NOT EXISTS idx_orders_token      ON manual_production_orders (ap
 
 
 -- =============================================================
--- 6. AUDIT LOG  (append-only — never UPDATE or DELETE)
+-- 6. SAP ORDER RESULTS
+-- =============================================================
+CREATE TABLE IF NOT EXISTS sap_order_results (
+    id             SERIAL        PRIMARY KEY,
+    order_id       INTEGER
+                                 REFERENCES manual_production_orders(id) ON DELETE SET NULL,
+    batch_id       VARCHAR(20)
+                                 REFERENCES manual_order_batches(batch_id) ON DELETE SET NULL,
+    approval_token VARCHAR(100)  NOT NULL,
+    material       VARCHAR(50),
+    plant          VARCHAR(20),
+    quantity       NUMERIC(12,3),
+    unit           VARCHAR(20),
+    sap_order_no   TEXT,
+    messages       JSONB,
+    raw_response   JSONB,
+    api_status     VARCHAR(20)   NOT NULL DEFAULT 'SUCCESS',
+    error_detail   TEXT,
+    created_at     TIMESTAMP     NOT NULL DEFAULT NOW()
+);
+
+COMMENT ON TABLE  sap_order_results IS 'Stores raw SAP API response for each approved order or batch line';
+COMMENT ON COLUMN sap_order_results.sap_order_no IS 'Order number text returned by SAP (e.g. "Order number 123456 saved")';
+COMMENT ON COLUMN sap_order_results.messages     IS 'JSON array of SAP MESSAGE objects from the API response';
+COMMENT ON COLUMN sap_order_results.raw_response IS 'Full normalised API response for debugging';
+
+CREATE INDEX IF NOT EXISTS idx_sap_order_id  ON sap_order_results (order_id);
+CREATE INDEX IF NOT EXISTS idx_sap_batch_id  ON sap_order_results (batch_id);
+CREATE INDEX IF NOT EXISTS idx_sap_token     ON sap_order_results (approval_token);
+CREATE INDEX IF NOT EXISTS idx_sap_status    ON sap_order_results (api_status);
+
+
+-- =============================================================
+-- 7. AUDIT LOG  (append-only — never UPDATE or DELETE)
 -- =============================================================
 CREATE TABLE IF NOT EXISTS audit_logs (
     id              BIGSERIAL       PRIMARY KEY,

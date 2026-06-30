@@ -1,9 +1,11 @@
 from backend.repositories.plant_repository import get_price_for_part
 from backend.repositories.approval_repository import get_approver_email
 from backend.repositories.order_repository import insert_order
+from backend.repositories.user_repository import get_user
 from backend.repositories.batch_repository import (
     insert_batch,
     get_batches_by_employee,
+    get_batch_by_token,
     get_orders_by_batch_token,
     update_batch_status,
 )
@@ -14,12 +16,12 @@ from backend.services.sap_service import call_sap_and_normalize
 from backend.core.config import APP_URL
 from backend.core.logger import get_logger
 from backend.core.constants import STATUS_PENDING, STATUS_APPROVED, STATUS_REJECTED
-from backend.utils.exceptions import PartNotFoundError
+from backend.utils.exceptions import PartNotFoundError, BatchNotFoundError
 
 logger = get_logger("batch_service")
 
 
-def create_batch(employee_id: str, items: list[dict]) -> tuple[str, str, str, str]:
+def create_batch(employee_id: str, items: list[dict], remark: str | None = None) -> tuple[str, str, str, str]:
     """Validate all items, save batch + orders to DB, return (batch_id, approver_email, subject, body)."""
     enriched = []
     for item in items:
@@ -35,7 +37,7 @@ def create_batch(employee_id: str, items: list[dict]) -> tuple[str, str, str, st
     total_value = sum(i["value"] for i in enriched)
     approver    = get_approver_email(total_value)
     token       = generate_token()
-    batch_id    = insert_batch(employee_id, total_value, token, approver)
+    batch_id    = insert_batch(employee_id, total_value, token, approver, remark=remark)
 
     for item in enriched:
         insert_order(
@@ -52,15 +54,25 @@ def create_batch(employee_id: str, items: list[dict]) -> tuple[str, str, str, st
     log_action("BATCH_CREATED", employee_id=employee_id, entity="BATCH",
                entity_id=batch_id, detail=f"items={len(enriched)} total={total_value:.2f}")
 
+    user = get_user(employee_id)
+    full_name = user["full_name"] if user and user.get("full_name") else employee_id
+
     subject = f"Batch {batch_id} — Approval Required | ₹{total_value:,.2f}"
-    body    = _build_batch_email_body(batch_id, employee_id, enriched, total_value, token)
+    body    = _build_batch_email_body(batch_id, employee_id, full_name, enriched, total_value, token, remark)
     logger.info(f"Batch saved | batch={batch_id} approver={approver} items={len(enriched)} total={total_value}")
     return batch_id, approver, subject, body
 
 
 def approve_batch_db(token: str) -> list[dict]:
-    """Mark batch + all orders as APPROVED in DB. Returns orders list for background SAP. Fast."""
+    """Mark batch + all orders as APPROVED in DB. Returns orders list for background SAP.
+    Returns empty list if the batch was already processed — caller must skip SAP in that case."""
     logger.info(f"Approving batch | token={token}")
+    batch = get_batch_by_token(token)
+    if not batch:
+        raise BatchNotFoundError(f"No batch found for token: {token}")
+    if batch["status"] != "PENDING":
+        logger.warning(f"approve_batch_db: batch already {batch['status']} | token={token}")
+        return []
     orders = get_orders_by_batch_token(token)
     update_batch_status(token, STATUS_APPROVED)
     log_action("BATCH_APPROVED", entity="BATCH", entity_id=token)
@@ -85,6 +97,12 @@ def submit_batch_to_sap(token: str, orders: list[dict]) -> None:
 
 
 def reject_batch(token: str) -> None:
+    batch = get_batch_by_token(token)
+    if not batch:
+        raise BatchNotFoundError(f"No batch found for token: {token}")
+    if batch["status"] != "PENDING":
+        logger.warning(f"reject_batch: batch already {batch['status']} — skipping | token={token}")
+        return
     logger.info(f"Rejecting batch | token={token}")
     update_batch_status(token, STATUS_REJECTED)
     log_action("BATCH_REJECTED", entity="BATCH", entity_id=token)
@@ -95,10 +113,12 @@ def get_batches(employee_id: str) -> list[dict]:
 
 
 def _build_batch_email_body(
-    batch_id: str, employee_id: str, items: list[dict], total_value: float, token: str,
+    batch_id: str, employee_id: str, full_name: str, items: list[dict], total_value: float, token: str,
+    remark: str | None = None,
 ) -> str:
-    approve_link = f"{APP_URL}/approve/batch/{token}"
-    reject_link  = f"{APP_URL}/reject/batch/{token}"
+    action_link = f"{APP_URL}/email/action/batch/{token}"
+
+    requestor_display = f"{employee_id} ({full_name})"
 
     rows_html = "".join(
         f"<tr>"
@@ -111,13 +131,16 @@ def _build_batch_email_body(
         for i in items
     )
 
+    remark_line = f"<b>Remark      :</b> {remark}<br>" if remark else ""
+
     return f"""
     <h2>Batch Production Order &mdash; Approval Required</h2>
 
     <b>Batch ID    :</b> {batch_id}<br>
-    <b>Employee    :</b> {employee_id}<br>
+    <b>Requestor   :</b> {requestor_display}<br>
     <b>Total Parts :</b> {len(items)}<br>
-    <b>Total Value :</b> <strong>₹{total_value:,.2f}</strong><br><br>
+    <b>Total Value :</b> <strong>₹{total_value:,.2f}</strong><br>
+    {remark_line}<br>
 
     <table border="1" cellpadding="0" cellspacing="0"
            style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:13px;">
@@ -139,17 +162,16 @@ def _build_batch_email_body(
         </tfoot>
     </table><br>
 
-    <a href="{approve_link}" style="text-decoration:none;">
-        <button style="background:#2e7d32;color:white;padding:12px 28px;
-                       font-size:14px;border:none;border-radius:4px;">
-            APPROVE ALL ({len(items)} orders)
-        </button>
-    </a>
-    &nbsp;&nbsp;
-    <a href="{reject_link}" style="text-decoration:none;">
-        <button style="background:#c62828;color:white;padding:12px 28px;
-                       font-size:14px;border:none;border-radius:4px;">
-            REJECT ALL
+    <p style="color:#64748b;font-size:13px;">
+      Click the button below to review this batch and take action.
+      The approve / reject options will be hidden once a decision has been made.
+    </p><br>
+
+    <a href="{action_link}" style="text-decoration:none;">
+        <button style="background:#1a3c5e;color:white;padding:14px 32px;
+                       font-size:15px;font-weight:bold;border:none;border-radius:6px;
+                       cursor:pointer;">
+            Review &amp; Take Action &#x2192;
         </button>
     </a>
     """
