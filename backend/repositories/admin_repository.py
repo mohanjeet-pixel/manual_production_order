@@ -113,43 +113,55 @@ def get_audit_logs(
 # ── Products replace (CSV/Excel upload) ───────────────────────
 
 def replace_products(rows: list[dict]) -> int:
-    """Full catalog replacement: delete all old products and insert fresh rows.
-    Stale plant_parts references are removed first to avoid FK violations."""
-    new_parts = [row.get("part") for row in rows if row.get("part")]
+    """Full catalog refresh: upsert every uploaded row (is_active=TRUE) and
+    deactivate any product missing from the upload.
+
+    Products are never hard-deleted: manual_production_orders.part_no references
+    products(part) ON DELETE RESTRICT, so deleting a part that already has orders
+    would raise a FK violation. Deactivation (is_active=FALSE) hides the part from
+    ordering — plant_repository filters on is_active=TRUE — while preserving order
+    history."""
+    new_parts = [str(row.get("part")).strip() for row in rows if row.get("part")]
     with get_db() as conn:
         try:
             cur = conn.cursor()
 
-            if new_parts:
-                placeholders = ",".join(["%s"] * len(new_parts))
-                cur.execute(
-                    f"DELETE FROM products WHERE part NOT IN ({placeholders})",
-                    new_parts,
-                )
-            else:
-                cur.execute("DELETE FROM products")
-
             count = 0
             for row in rows:
                 cur.execute("""
-                    INSERT INTO products (part, description, pro_type, price, is_active)
+                    INSERT INTO products (part, description, plant, price, is_active)
                     VALUES (%s, %s, %s, %s, TRUE)
                     ON CONFLICT (part) DO UPDATE
                         SET description = EXCLUDED.description,
-                            pro_type    = EXCLUDED.pro_type,
+                            plant       = EXCLUDED.plant,
                             price       = EXCLUDED.price,
                             is_active   = TRUE,
                             updated_at  = NOW()
                 """, (
                     row.get("part"),
                     row.get("description"),
-                    row.get("pro_type"),
+                    row.get("plant"),
                     row.get("price"),
                 ))
                 count += 1
 
+            # Deactivate catalog entries absent from this upload (cannot DELETE:
+            # ON DELETE RESTRICT FK from manual_production_orders.part_no).
+            if new_parts:
+                placeholders = ",".join(["%s"] * len(new_parts))
+                cur.execute(
+                    f"UPDATE products SET is_active = FALSE, updated_at = NOW() "
+                    f"WHERE part NOT IN ({placeholders}) AND is_active = TRUE",
+                    new_parts,
+                )
+            else:
+                cur.execute(
+                    "UPDATE products SET is_active = FALSE, updated_at = NOW() "
+                    "WHERE is_active = TRUE"
+                )
+
             conn.commit()
-            logger.info(f"Products replaced | inserted={count}")
+            logger.info(f"Products replaced | upserted={count}")
             return count
         except Exception as e:
             conn.rollback()

@@ -52,7 +52,7 @@ CREATE INDEX IF NOT EXISTS idx_users_active     ON users (is_active);
 CREATE TABLE IF NOT EXISTS products (
     part            VARCHAR(50)     PRIMARY KEY,
     description     TEXT,
-    pro_type        VARCHAR(20),
+    plant           VARCHAR(20),
     price           NUMERIC(14,2)   NOT NULL CONSTRAINT chk_products_price CHECK (price > 0),
     is_active       BOOLEAN         NOT NULL DEFAULT TRUE,
     updated_at      TIMESTAMP       NOT NULL DEFAULT NOW(),
@@ -60,14 +60,14 @@ CREATE TABLE IF NOT EXISTS products (
 );
 
 COMMENT ON TABLE  products IS 'Parts catalog uploaded via Excel (Material No, Description, Price, Plant)';
-COMMENT ON COLUMN products.pro_type IS 'Plant code from upload: 1000 or 1500';
+COMMENT ON COLUMN products.plant IS 'Plant code from upload: 1000 or 1500';
 
 CREATE OR REPLACE TRIGGER trg_products_updated_at
     BEFORE UPDATE ON products
     FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
 CREATE INDEX IF NOT EXISTS idx_products_active     ON products (is_active);
-CREATE INDEX IF NOT EXISTS idx_products_part_plant ON products (part, pro_type);
+CREATE INDEX IF NOT EXISTS idx_products_part_plant ON products (part, plant);
 
 
 -- =============================================================

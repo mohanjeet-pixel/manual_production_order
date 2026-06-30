@@ -139,7 +139,7 @@ async def upload_products(
         "material_no":  "part",
         "material_num": "part",
         "material":     "part",
-        "plant":        "pro_type",
+        # Excel "Plant" header maps directly to the products.plant column
     }
     df.rename(columns=col_map, inplace=True)
 
@@ -154,9 +154,14 @@ async def upload_products(
 
     df = df.dropna(subset=["part", "price"])
     df["part"]  = df["part"].astype(str).str.strip()
-    df["price"] = df["price"].astype(float)
-    if "pro_type" in df.columns:
-        df["pro_type"] = df["pro_type"].astype(str).str.strip()
+    df["price"] = pd.to_numeric(df["price"], errors="coerce")
+    # products.price has CHECK (price > 0); drop rows that would violate it
+    df = df[df["price"] > 0]
+    if "plant" in df.columns:
+        # Excel numeric plant codes may read as 1500.0 — strip the trailing .0
+        df["plant"] = (
+            df["plant"].astype(str).str.strip().str.replace(r"\.0$", "", regex=True)
+        )
 
     rows = df.to_dict(orient="records")
     count = replace_products(rows)
